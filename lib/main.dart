@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoApp(
       title: 'iOS Demo',
+      theme: CupertinoThemeData(primaryColor: CupertinoColors.activeBlue),
       home: App(),
     );
   }

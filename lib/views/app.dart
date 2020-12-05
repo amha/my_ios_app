@@ -1,16 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_ios_app/views/settings.dart';
 
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: Text('Apple Music'),
-        leading: Icon(
-          CupertinoIcons.settings,
-        ),
-      ),
+          middle: Text('Apple Music'),
+          leading: CupertinoButton(
+            child: Icon(
+              CupertinoIcons.settings,
+            ),
+            onPressed: () {
+              Navigator.of(context)
+                  .push(CupertinoPageRoute(builder: (context) => Settings()));
+            },
+          )),
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -30,7 +36,7 @@ class App extends StatelessWidget {
                     fit: BoxFit.cover,
                   )),
               decoration: BoxDecoration(
-                  color: CupertinoColors.link,
+                  color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   boxShadow: [
                     BoxShadow(
