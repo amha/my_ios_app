@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  carousel_slider: ^2.3.1
 
   cupertino_icons: ^1.0.1
 
@@ -34,6 +35,14 @@ flutter:
 
   uses-material-design: true
 
-
   assets:
     - assets/album.jpeg
+    - assets/shop/logo.png
+    - assets/shop/1.png
+    - assets/shop/2.png
+    - assets/shop/3.png
+    - assets/shop/4.png
+    - assets/shop/5.png
+    - assets/shop/6.png
+
+

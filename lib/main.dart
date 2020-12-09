@@ -7,11 +7,11 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
       title: 'iOS Demo',
+      debugShowCheckedModeBanner: false,
       theme: CupertinoThemeData(primaryColor: CupertinoColors.activeBlue),
       home: App(),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_ios_app/views/shop/launcher.dart';
 
 class Settings extends StatelessWidget {
   @override
@@ -64,13 +65,19 @@ class Settings extends StatelessWidget {
             height: 100,
             width: MediaQuery.of(context).size.width,
             child: Center(
-              child: Text(
-                'Etsy',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
+              child: RaisedButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                      CupertinoPageRoute(builder: (context) => ShopLauncher()));
+                },
+                child: Text(
+                  'Shop',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
             ),
           ),
