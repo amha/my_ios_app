@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_ios_app/model/shop/product.dart';
+import 'package:my_ios_app/views/shop/product_preview.dart';
 
 final List<String> imgList = [
   'assets/shop/1.png',
@@ -133,26 +135,244 @@ class _ShopHomeState extends State<ShopHome> {
                   ),
                 ),
                 Container(
+                  margin: EdgeInsets.symmetric(vertical: 16),
                   height: 200,
                   width: MediaQuery.of(context).size.width,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        child: Text('Section title'),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Text(
+                                'Personalized gifts',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 8),
+                              child: Text(
+                                'Gifts that feel authentic',
+                                style: TextStyle(fontWeight: FontWeight.w400),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                       Container(
-                        height: 100,
-                        width: 90,
+                        height: 140,
+                        width: MediaQuery.of(context).size.width,
                         child: CarouselSlider(
-                          options: CarouselOptions(),
+                          options: CarouselOptions(
+                              viewportFraction: 0.4,
+                              aspectRatio: 3 / 2,
+                              enableInfiniteScroll: false,
+                              reverse: false,
+                              initialPage: 1,
+                              autoPlayCurve: Curves.fastOutSlowIn,
+                              disableCenter: false),
                           items: imgList
                               .map((e) => Container(
-                                    width: 90,
-                                    height: 90,
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 5.0),
                                     child: Center(
                                       child: Image.asset(
                                         e,
                                         fit: BoxFit.cover,
+                                        width: 200,
+                                        height: 133,
+                                      ),
+                                    ),
+                                  ))
+                              .toList(),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 16),
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Text(
+                                'Work from home',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 8),
+                              child: Text(
+                                'Home office stuff you need',
+                                style: TextStyle(fontWeight: FontWeight.w400),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 140,
+                        width: MediaQuery.of(context).size.width,
+                        child: CarouselSlider(
+                          options: CarouselOptions(
+                              viewportFraction: 0.4,
+                              aspectRatio: 3 / 2,
+                              enableInfiniteScroll: false,
+                              reverse: false,
+                              initialPage: 1,
+                              autoPlayCurve: Curves.fastOutSlowIn,
+                              disableCenter: false),
+                          items: imgList
+                              .map((e) => Container(
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 5.0),
+                                    child: Center(
+                                      child: Image.asset(
+                                        e,
+                                        fit: BoxFit.cover,
+                                        width: 200,
+                                        height: 133,
+                                      ),
+                                    ),
+                                  ))
+                              .toList(),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 16),
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Text(
+                                'Home decor',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 8),
+                              child: Text(
+                                'Accentuate you home with essentials',
+                                style: TextStyle(fontWeight: FontWeight.w400),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 140,
+                        width: MediaQuery.of(context).size.width,
+                        child: CarouselSlider(
+                          options: CarouselOptions(
+                              viewportFraction: 0.4,
+                              aspectRatio: 3 / 2,
+                              enableInfiniteScroll: false,
+                              reverse: false,
+                              initialPage: 1,
+                              autoPlayCurve: Curves.fastOutSlowIn,
+                              disableCenter: false),
+                          items: imgList
+                              .map((e) => Container(
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 5.0),
+                                    child: Center(
+                                      child: Image.asset(
+                                        e,
+                                        fit: BoxFit.cover,
+                                        width: 200,
+                                        height: 133,
+                                      ),
+                                    ),
+                                  ))
+                              .toList(),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 16),
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Text(
+                                'Camera straps',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 8),
+                              child: Text(
+                                'Add flair to your camera',
+                                style: TextStyle(fontWeight: FontWeight.w400),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 140,
+                        width: MediaQuery.of(context).size.width,
+                        child: CarouselSlider(
+                          options: CarouselOptions(
+                              viewportFraction: 0.4,
+                              aspectRatio: 3 / 2,
+                              enableInfiniteScroll: false,
+                              reverse: false,
+                              initialPage: 1,
+                              autoPlayCurve: Curves.fastOutSlowIn,
+                              disableCenter: false),
+                          items: imgList
+                              .map((e) => Container(
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 5.0),
+                                    child: Center(
+                                      child: Image.asset(
+                                        e,
+                                        fit: BoxFit.cover,
+                                        width: 200,
+                                        height: 133,
                                       ),
                                     ),
                                   ))
@@ -183,7 +403,9 @@ class _ShopHomeState extends State<ShopHome> {
         return CupertinoPageScaffold(
           backgroundColor: Colors.pinkAccent,
           child: Container(
-            child: Text('Cart'),
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Center(child: ProductPreview(Product('goat', true, imgList[0]))),
           ),
         );
       },
