@@ -391,9 +391,49 @@ class _ShopHomeState extends State<ShopHome> {
     CupertinoTabView(
       builder: (BuildContext context) {
         return CupertinoPageScaffold(
-          backgroundColor: Colors.amberAccent,
           child: Container(
-            child: Text('Favorites'),
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Icon(
+                    CupertinoIcons.heart_slash,
+                    color: Colors.black,
+                    size: 80,
+                  ),
+                ),
+                Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 64, vertical: 8),
+                    child: Text(
+                      'Sign in to save your favorite items and shops.',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      textAlign: TextAlign.center,
+                    )),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 16),
+                  height: 56,
+                  width: 200,
+                  child: RaisedButton(
+                    onPressed: () {},
+                    color: Colors.black,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                    child: Text(
+                      'Sign In',
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          navigationBar: CupertinoNavigationBar(
+            middle: Text('Favorites'),
           ),
         );
       },
@@ -401,7 +441,9 @@ class _ShopHomeState extends State<ShopHome> {
     CupertinoTabView(
       builder: (BuildContext context) {
         return CupertinoPageScaffold(
-          backgroundColor: Colors.pinkAccent,
+          navigationBar: CupertinoNavigationBar(
+            middle: Text('You'),
+          ),
           child: Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
@@ -415,9 +457,54 @@ class _ShopHomeState extends State<ShopHome> {
     CupertinoTabView(
       builder: (BuildContext context) {
         return CupertinoPageScaffold(
-          backgroundColor: Colors.blueAccent,
+          navigationBar: CupertinoNavigationBar(
+            middle: Text('Cart'),
+          ),
           child: Container(
-            child: Text('Profile'),
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Icon(
+                    CupertinoIcons.cart,
+                    color: Colors.black,
+                    size: 80,
+                  ),
+                ),
+                Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Text(
+                      'You \'shopping cart is empty',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    )),
+                Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Text(
+                      'Looking for ideas?',
+                      style: TextStyle(fontWeight: FontWeight.normal),
+                    )),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 16),
+                  height: 56,
+                  width: 200,
+                  child: RaisedButton(
+                    onPressed: () {},
+                    color: Colors.black,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                    child: Text(
+                      'See what\' trending',
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         );
       },
