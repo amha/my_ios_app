@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:my_ios_app/model/shop/product.dart';
+import 'package:my_ios_app/views/shop/product_detail.dart';
 
 class ProductPreview extends StatefulWidget {
   Product productModel;
@@ -19,8 +20,10 @@ class _ProductPreviewState extends State<ProductPreview> {
       children: [
         GestureDetector(
           onTap: () {
-            print('tapped');
-          },
+            Navigator
+                .of(context)
+                .push(CupertinoPageRoute(builder: (context) => ProductDetail()));
+            },
           child: Container(
             width: 200,
             height: 133,
