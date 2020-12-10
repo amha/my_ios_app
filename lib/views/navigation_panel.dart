@@ -16,7 +16,7 @@ class Settings extends StatelessWidget {
             color: CupertinoColors.black,
             child: Center(
               child: Text(
-                'iOS Flutter DEMO',
+                'iOS Demo',
                 style: TextStyle(color: CupertinoColors.white, fontSize: 26),
               ),
             ),
@@ -65,7 +65,7 @@ class Settings extends StatelessWidget {
             height: 100,
             width: MediaQuery.of(context).size.width,
             child: Center(
-              child: RaisedButton(
+              child: FlatButton(
                 onPressed: () {
                   Navigator.of(context).push(
                       CupertinoPageRoute(builder: (context) => ShopLauncher()));

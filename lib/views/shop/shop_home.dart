@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:my_ios_app/model/shop/product.dart';
 import 'package:my_ios_app/views/shop/product_preview.dart';
 
-final List<String> imgList = [
+final List<String> productPreviewImages = [
   'assets/shop/1.png',
   'assets/shop/2.png',
   'assets/shop/3.png',
@@ -177,7 +177,7 @@ class _ShopHomeState extends State<ShopHome> {
                               initialPage: 1,
                               autoPlayCurve: Curves.fastOutSlowIn,
                               disableCenter: false),
-                          items: imgList
+                          items: productPreviewImages
                               .map((e) => Container(
                                     margin:
                                         EdgeInsets.symmetric(horizontal: 5.0),
@@ -239,7 +239,7 @@ class _ShopHomeState extends State<ShopHome> {
                               initialPage: 1,
                               autoPlayCurve: Curves.fastOutSlowIn,
                               disableCenter: false),
-                          items: imgList
+                          items: productPreviewImages
                               .map((e) => Container(
                                     margin:
                                         EdgeInsets.symmetric(horizontal: 5.0),
@@ -301,7 +301,7 @@ class _ShopHomeState extends State<ShopHome> {
                               initialPage: 1,
                               autoPlayCurve: Curves.fastOutSlowIn,
                               disableCenter: false),
-                          items: imgList
+                          items: productPreviewImages
                               .map((e) => Container(
                                     margin:
                                         EdgeInsets.symmetric(horizontal: 5.0),
@@ -363,7 +363,7 @@ class _ShopHomeState extends State<ShopHome> {
                               initialPage: 1,
                               autoPlayCurve: Curves.fastOutSlowIn,
                               disableCenter: false),
-                          items: imgList
+                          items: productPreviewImages
                               .map((e) => Container(
                                     margin:
                                         EdgeInsets.symmetric(horizontal: 5.0),
@@ -405,7 +405,9 @@ class _ShopHomeState extends State<ShopHome> {
           child: Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            child: Center(child: ProductPreview(Product('goat', true, imgList[0]))),
+            child: Center(
+                child: ProductPreview(
+                    Product('goat', true, productPreviewImages[0]))),
           ),
         );
       },

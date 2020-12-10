@@ -1,5 +1,13 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+final List<String> productImages = [
+  'assets/shop/triangleProduct1.png',
+  'assets/shop/triangleProduct2.png',
+  'assets/shop/triangleProduct3.png',
+  'assets/shop/triangleProduct4.png'
+];
 
 class ProductDetail extends StatefulWidget {
   @override
@@ -9,18 +17,26 @@ class ProductDetail extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetail> {
+  bool isFavorite = false;
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-          backgroundColor: Color(0x11000000),
-          leading: CircleAvatar(
-            backgroundColor: Colors.white,
-            child: Center(
-              child: Icon(
-                Icons.arrow_back_ios,
-                color: Colors.black,
-                size: 18,
+          brightness: Brightness.light,
+          backgroundColor: Colors.transparent,
+          leading: GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: CircleAvatar(
+              backgroundColor: Colors.white,
+              child: Center(
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.black,
+                  size: 18,
+                ),
               ),
             ),
           ),
@@ -35,165 +51,380 @@ class _ProductDetailsState extends State<ProductDetail> {
                 ),
               ),
               CupertinoButton(
-                onPressed: () {},
-                child: Icon(
-                  CupertinoIcons.heart,
-                  color: Colors.white,
-                ),
+                onPressed: () {
+                  setState(() {
+                    if (isFavorite) {
+                      this.isFavorite = false;
+                    } else {
+                      this.isFavorite = true;
+                    }
+                  });
+                },
+                child: isFavorite
+                    ? Icon(
+                        CupertinoIcons.heart_fill,
+                        color: CupertinoColors.destructiveRed,
+                      )
+                    : Icon(
+                        CupertinoIcons.heart,
+                        color: CupertinoColors.white,
+                      ),
               )
             ],
           )),
-      child: Column(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 500,
-            child: Image.asset(
-              'assets/shop/1.png',
-              fit: BoxFit.fill,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 500,
+              child: CarouselSlider(
+                options: CarouselOptions(
+                    viewportFraction: 1,
+                    aspectRatio: 1 / 1,
+                    enableInfiniteScroll: false,
+                    reverse: false,
+                    initialPage: 1,
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    disableCenter: false),
+                items: productImages
+                    .map((e) => Container(
+                          margin: EdgeInsets.symmetric(horizontal: 5.0),
+                          child: Center(
+                            child: Image.asset(
+                              e,
+                              fit: BoxFit.fill,
+                              width: 500,
+                              height: 500,
+                            ),
+                          ),
+                        ))
+                    .toList(),
+              ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 24, horizontal: 8),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.pink,
-                    radius: 20,
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 24, horizontal: 8),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.pink,
+                      radius: 20,
+                      child: Text(
+                        'A',
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 5,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('AMHA SHOPPA'),
+                        Text(
+                          '493 Sales',
+                          style: TextStyle(fontSize: 14, color: Colors.black54),
+                        )
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Icon(
+                          CupertinoIcons.star_fill,
+                          color: Colors.black,
+                          size: 18,
+                        ),
+                        Icon(
+                          CupertinoIcons.star_fill,
+                          color: Colors.black,
+                          size: 18,
+                        ),
+                        Icon(
+                          CupertinoIcons.star_fill,
+                          color: Colors.black,
+                          size: 18,
+                        ),
+                        Icon(
+                          CupertinoIcons.star_lefthalf_fill,
+                          color: Colors.black,
+                          size: 18,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+              child: Text(
+                'Super awesome product name goes here and may wrap to a second line',
+                style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  fontSize: 22,
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '\$594.00',
+                    style: TextStyle(
+                        color: Colors.pink[900],
+                        fontWeight: FontWeight.w700,
+                        fontSize: 22),
+                  ),
+                  Text(
+                    'One 4 available',
+                    style: TextStyle(
+                        color: Colors.black54,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 16),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              margin: EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Free shipping',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  Text(
+                    'to United States',
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 55,
+                  child: RaisedButton(
+                    padding: EdgeInsets.all(16),
+                    color: Colors.black,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(40))),
+                    onPressed: () {
+                      print('added to card');
+                    },
                     child: Text(
-                      'A',
+                      'Add to Cart',
                       style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
                     ),
                   ),
                 ),
-                Expanded(
-                  flex: 5,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('AMHA SHOPPA'),
-                      Text(
-                        '493 Sales',
-                        style: TextStyle(fontSize: 14, color: Colors.black54),
-                      )
-                    ],
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Icon(
-                        CupertinoIcons.star_fill,
-                        color: Colors.black,
-                        size: 18,
-                      ),
-                      Icon(
-                        CupertinoIcons.star_fill,
-                        color: Colors.black,
-                        size: 18,
-                      ),
-                      Icon(
-                        CupertinoIcons.star_fill,
-                        color: Colors.black,
-                        size: 18,
-                      ),
-                      Icon(
-                        CupertinoIcons.star_lefthalf_fill,
-                        color: Colors.black,
-                        size: 18,
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-            child: Text(
-              'Super awesome product name goes here and may wrap to a second line',
-              style: TextStyle(
-                fontWeight: FontWeight.w300,
-                fontSize: 22,
               ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '\$594.00',
-                  style: TextStyle(
-                      color: Colors.pink[900],
-                      fontWeight: FontWeight.w700,
-                      fontSize: 22),
-                ),
-                Text(
-                  'One 4 available',
-                  style: TextStyle(
-                      color: Colors.black54,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 16),
-                )
-              ],
-            ),
-          ),
-          Container(
-            alignment: Alignment.centerLeft,
-            margin: EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Free shipping',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
+            Container(
+              height: 200,
+              margin: EdgeInsets.fromLTRB(16, 16, 0, 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Divider(
+                      height: .4,
+                      indent: 1,
+                      thickness: .2,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-                Text(
-                  'to United States',
-                  style: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontSize: 16,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Item Details',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 55,
-                child: RaisedButton(
-                  padding: EdgeInsets.all(16),
-                  color: Colors.black,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(40))),
-                  onPressed: () {
-                    print('added to card');
-                  },
-                  child: Text(
-                    'Add to Cart',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          CupertinoIcons.hand_raised,
+                          size: 18,
+                        ),
+                        Text('  Hand made')
+                      ],
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          CupertinoIcons.leaf_arrow_circlepath,
+                          size: 18,
+                        ),
+                        Text('  Includes recycled material')
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          CupertinoIcons.pencil_circle,
+                          size: 18,
+                        ),
+                        Text('  Personalizable')
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          CupertinoIcons.tortoise_fill,
+                          size: 18,
+                        ),
+                        Text('  Ships late')
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
-          )
-        ],
+            Container(
+              height: 480,
+              margin: EdgeInsets.fromLTRB(16, 16, 0, 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Divider(
+                      height: .4,
+                      indent: 1,
+                      thickness: .2,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Shipping & Policies',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 8, 8, 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Ready to ship in 3-5 days',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 14),
+                        ),
+                        Text(
+                          'Shipping upgrades available in the cart',
+                          style: TextStyle(
+                              fontWeight: FontWeight.normal, fontSize: 14),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: Divider(
+                            height: .3,
+                            thickness: .3,
+                            indent: 0,
+                            endIndent: 16,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        Text(
+                          'Gift options',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 14),
+                        ),
+                        Text(
+                          'Gift message available',
+                          style: TextStyle(
+                              fontWeight: FontWeight.normal, fontSize: 14),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: Divider(
+                            height: .3,
+                            thickness: .3,
+                            indent: 0,
+                            endIndent: 16,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 8),
+                              child: Text(
+                                'Payment options',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 14),
+                              ),
+                            ),
+                            Image.asset('assets/shop/acceptance.png')
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: Divider(
+                            height: .3,
+                            thickness: .3,
+                            indent: 0,
+                            endIndent: 16,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        Text(
+                          'Refunds & exchanges',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 14),
+                        ),
+                        Text(
+                          'Contact me in 10 days and we can sort our your refund request.'
+                          '\n\nI do not accept exchanges.',
+                          style: TextStyle(
+                              fontWeight: FontWeight.normal, fontSize: 14),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

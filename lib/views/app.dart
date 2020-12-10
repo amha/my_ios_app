@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_ios_app/views/settings.dart';
+import 'package:my_ios_app/views/navigation_panel.dart';
 
 class App extends StatelessWidget {
   @override
