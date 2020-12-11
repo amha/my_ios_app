@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_ios_app/views/shop/launcher.dart';
+import 'package:my_ios_app/views/wallet/wallet_home.dart';
 
 class Settings extends StatelessWidget {
   @override
@@ -71,7 +72,7 @@ class Settings extends StatelessWidget {
                       CupertinoPageRoute(builder: (context) => ShopLauncher()));
                 },
                 child: Text(
-                  'Shop',
+                  'Shop: mCommerce demo',
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 20,
@@ -91,13 +92,19 @@ class Settings extends StatelessWidget {
             height: 100,
             width: MediaQuery.of(context).size.width,
             child: Center(
-              child: Text(
-                'Apple Wallet',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
+              child: FlatButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                      CupertinoPageRoute(builder: (context) => WalletHome()));
+                },
+                child: Text(
+                  'Digital wallet demo',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
             ),
           ),
