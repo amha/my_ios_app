@@ -22,6 +22,7 @@ class _WalletHomeState extends State<WalletHome> {
           textAlign: TextAlign.center,
         ),
         trailing: CupertinoButton(
+          onPressed: () {},
           child: Icon(
             CupertinoIcons.add_circled_solid,
             color: CupertinoColors.black,

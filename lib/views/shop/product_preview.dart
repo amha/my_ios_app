@@ -3,7 +3,7 @@ import 'package:my_ios_app/model/shop/product.dart';
 import 'package:my_ios_app/views/shop/product_detail.dart';
 
 class ProductPreview extends StatefulWidget {
-  Product productModel;
+  final Product productModel;
 
   ProductPreview(this.productModel);
 
@@ -20,10 +20,9 @@ class _ProductPreviewState extends State<ProductPreview> {
       children: [
         GestureDetector(
           onTap: () {
-            Navigator
-                .of(context)
-                .push(CupertinoPageRoute(builder: (context) => ProductDetail()));
-            },
+            Navigator.of(context).push(
+                CupertinoPageRoute(builder: (context) => ProductDetail()));
+          },
           child: Container(
             width: 200,
             height: 133,
