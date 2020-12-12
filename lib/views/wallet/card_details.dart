@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_ios_app/views/wallet/card_settings.dart';
 import 'package:my_ios_app/views/wallet/transaction_detail.dart';
 
 class CardDetails extends StatefulWidget {
@@ -16,13 +17,11 @@ class _CardDetailsState extends State<CardDetails>
 
   @override
   void initState() {
-    //Primaty
     _primary =
         AnimationController(vsync: this, duration: Duration(milliseconds: 400));
     _animationPrimary = Tween<double>(begin: 0, end: 1)
         .animate(CurvedAnimation(parent: _primary, curve: Curves.easeInOut));
 
-    //Secondary
     _secondary =
         AnimationController(vsync: this, duration: Duration(milliseconds: 400));
     _animationSecondary = Tween<double>(begin: 0, end: 1)
@@ -47,6 +46,7 @@ class _CardDetailsState extends State<CardDetails>
       child: CupertinoPageScaffold(
         backgroundColor: CupertinoColors.systemGrey6,
         navigationBar: CupertinoNavigationBar(
+          actionsForegroundColor: Colors.black,
           border: Border.all(color: CupertinoColors.systemGrey6),
           leading: GestureDetector(
             onTap: () {
@@ -54,6 +54,16 @@ class _CardDetailsState extends State<CardDetails>
               _primary.reverse();
             },
             child: Text('Done'),
+          ),
+          trailing: CupertinoButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                  CupertinoPageRoute(builder: (context) => CardSettings()));
+            },
+            child: Icon(
+              CupertinoIcons.slider_horizontal_3,
+              color: Colors.black,
+            ),
           ),
         ),
         child: Column(
