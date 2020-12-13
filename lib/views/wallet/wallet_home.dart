@@ -95,7 +95,7 @@ class _WalletHomeState extends State<WalletHome> {
                           Text(
                             'START NOW',
                             style: TextStyle(
-                                color: CupertinoColors.activeBlue,
+                                color: CupertinoTheme.of(context).primaryColor,
                                 fontWeight: FontWeight.w600),
                           )
                         ],
@@ -107,6 +107,7 @@ class _WalletHomeState extends State<WalletHome> {
             ),
             GestureDetector(
               onTap: () {
+                //TODO add card
                 print('card 1 tapped');
               },
               child: Container(

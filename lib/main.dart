@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_ios_app/views/app.dart';
+import 'package:my_ios_app/views/App.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +12,13 @@ class MyApp extends StatelessWidget {
     return CupertinoApp(
       title: 'iOS Demo',
       debugShowCheckedModeBanner: false,
-      theme: CupertinoThemeData(primaryColor: CupertinoColors.activeBlue),
+      theme: CupertinoThemeData(
+          primaryColor: CupertinoColors.systemPink,
+          barBackgroundColor: CupertinoColors.systemGrey6,
+          textTheme: CupertinoTextThemeData(
+              actionTextStyle: TextStyle(
+                  color: CupertinoColors.systemPurple,
+                  fontWeight: FontWeight.w600))),
       home: App(),
     );
   }
