@@ -51,5 +51,9 @@ flutter:
     - assets/shop/acceptance.png
     - assets/wallet/acceptanceMark.png
     - assets/wallet/money.png
+    - assets/wallet/card.png
+    - assets/music_action.png
+    - assets/shopping_action.png
+    - assets/wallet_action.png
 
 

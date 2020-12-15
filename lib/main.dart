@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_ios_app/views/App.dart';
+import 'package:my_ios_app/views/app.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
           barBackgroundColor: CupertinoColors.systemGrey6,
           textTheme: CupertinoTextThemeData(
               actionTextStyle: TextStyle(
-                  color: CupertinoColors.systemPurple,
+                  color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.w600))),
       home: App(),
     );

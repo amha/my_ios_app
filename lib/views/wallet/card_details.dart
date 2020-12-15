@@ -69,54 +69,21 @@ class _CardDetailsState extends State<CardDetails>
         child: Column(
           children: [
             Container(
-              height: 230,
+              height: 250,
               width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.all(16),
-              margin: EdgeInsets.fromLTRB(16, 100, 16, 16),
+              margin: EdgeInsets.fromLTRB(16, 30, 16, 16),
               decoration: BoxDecoration(
                   color: CupertinoColors.activeBlue,
-                  borderRadius: BorderRadius.all(Radius.circular(15))),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    flex: 4,
-                    child: Text(
-                      'Liberty Bank Credit Card',
-                      style: TextStyle(
-                          color: CupertinoColors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          shadows: [
-                            Shadow(
-                                color: CupertinoColors.black,
-                                offset: Offset.zero,
-                                blurRadius: 23)
-                          ]),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '****5938',
-                          style: TextStyle(
-                              color: CupertinoColors.white,
-                              shadows: [
-                                Shadow(
-                                    color: CupertinoColors.black,
-                                    offset: Offset.zero,
-                                    blurRadius: 23)
-                              ]),
-                        ),
-                        Image.asset('assets/wallet/acceptanceMark.png')
-                      ],
-                    ),
-                  )
-                ],
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  boxShadow: [
+                    BoxShadow(
+                        spreadRadius: 10,
+                        blurRadius: 30,
+                        color: Color(0x22000000))
+                  ]),
+              child: Image.asset(
+                'assets/wallet/card.png',
+                fit: BoxFit.fill,
               ),
             ),
             Container(
