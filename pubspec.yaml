@@ -48,6 +48,10 @@ flutter:
     - assets/shop/triangleProduct2.png
     - assets/shop/triangleProduct3.png
     - assets/shop/triangleProduct4.png
+    - assets/shop/polygon1.png
+    - assets/shop/polygon2.png
+    - assets/shop/polygon3.png
+    - assets/shop/polygon4.png
     - assets/shop/acceptance.png
     - assets/wallet/acceptanceMark.png
     - assets/wallet/money.png

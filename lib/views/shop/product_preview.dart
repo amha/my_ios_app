@@ -20,12 +20,15 @@ class _ProductPreviewState extends State<ProductPreview> {
       children: [
         GestureDetector(
           onTap: () {
-            Navigator.of(context).push(
-                CupertinoPageRoute(builder: (context) => ProductDetail()));
+            Navigator.of(context).push(CupertinoPageRoute(
+                builder: (context) => ProductDetail(
+                      productData: this.widget.productModel,
+                    )));
           },
           child: Container(
             width: 200,
             height: 133,
+            padding: EdgeInsets.symmetric(horizontal: 5),
             child: Image.asset(
               this.widget.productModel.imageReference,
               fit: BoxFit.fill,

@@ -53,7 +53,10 @@ class _CardDetailsState extends State<CardDetails>
               Navigator.of(context).pop();
               _primary.reverse();
             },
-            child: Text('Done'),
+            child: Text(
+              'Done',
+              textAlign: TextAlign.center,
+            ),
           ),
           trailing: CupertinoButton(
             onPressed: () {

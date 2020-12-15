@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_ios_app/model/shop/product.dart';
 
 final List<String> productImages = [
   'assets/shop/triangleProduct1.png',
@@ -10,6 +11,10 @@ final List<String> productImages = [
 ];
 
 class ProductDetail extends StatefulWidget {
+  final Product productData;
+
+  ProductDetail({this.productData});
+
   @override
   State<StatefulWidget> createState() {
     return _ProductDetailsState();
@@ -23,7 +28,6 @@ class _ProductDetailsState extends State<ProductDetail> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-          brightness: Brightness.light,
           backgroundColor: Colors.transparent,
           leading: GestureDetector(
             onTap: () {
@@ -78,29 +82,27 @@ class _ProductDetailsState extends State<ProductDetail> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: 500,
-              child: CarouselSlider(
-                options: CarouselOptions(
-                    viewportFraction: 1,
-                    aspectRatio: 1 / 1,
-                    enableInfiniteScroll: false,
-                    reverse: false,
-                    initialPage: 1,
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    disableCenter: false),
-                items: productImages
-                    .map((e) => Container(
-                          margin: EdgeInsets.symmetric(horizontal: 5.0),
-                          child: Center(
-                            child: Image.asset(
-                              e,
-                              fit: BoxFit.fill,
-                              width: 500,
-                              height: 500,
-                            ),
+              child: CarouselSlider.builder(
+                  options: CarouselOptions(
+                      viewportFraction: 1,
+                      aspectRatio: 1 / 1,
+                      enableInfiniteScroll: false,
+                      reverse: false,
+                      initialPage: 1,
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      disableCenter: false),
+                  itemCount: 1,
+                  itemBuilder: (context, index) => Container(
+                        margin: EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Center(
+                          child: Image.asset(
+                            this.widget.productData.imageReference,
+                            fit: BoxFit.fill,
+                            width: 500,
+                            height: 500,
                           ),
-                        ))
-                    .toList(),
-              ),
+                        ),
+                      )),
             ),
             Container(
               margin: EdgeInsets.symmetric(vertical: 24, horizontal: 8),
