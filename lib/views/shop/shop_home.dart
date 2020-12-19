@@ -1,9 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_ios_app/model/shop/favorities.dart';
 import 'package:my_ios_app/model/shop/product.dart';
 import 'package:my_ios_app/resources/shop_catalog.dart';
 import 'package:my_ios_app/views/shop/product_preview.dart';
+import 'package:provider/provider.dart';
 
 class ShopHome extends StatefulWidget {
   @override
@@ -15,6 +17,12 @@ class ShopHome extends StatefulWidget {
 class _ShopHomeState extends State<ShopHome> {
   final CupertinoTabController _controller = CupertinoTabController();
   int tabIndex = 0;
+  List<Product> favoriteProducts;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,47 +152,98 @@ class _ShopHomeState extends State<ShopHome> {
     CupertinoTabView(
       builder: (BuildContext context) {
         return CupertinoPageScaffold(
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Icon(
-                    CupertinoIcons.heart_slash,
-                    color: Colors.black,
-                    size: 80,
-                  ),
-                ),
-                Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 64, vertical: 8),
-                    child: Text(
-                      'Sign in to save your favorite items and shops.',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                      textAlign: TextAlign.center,
-                    )),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 16),
-                  height: 56,
-                  width: 200,
-                  child: RaisedButton(
-                    onPressed: () {},
-                    color: Colors.black,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30))),
-                    child: Text(
-                      'Sign In',
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
+          child: context.watch<Favorites>().count == 0
+              ? Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Icon(
+                          CupertinoIcons.heart_slash,
+                          color: Colors.black,
+                          size: 80,
+                        ),
+                      ),
+                      Padding(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 64, vertical: 8),
+                          child: Text(
+                            'Sign in to save your favorite items and shops.',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                            textAlign: TextAlign.center,
+                          )),
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 16),
+                        height: 56,
+                        width: 200,
+                        child: RaisedButton(
+                          onPressed: () {},
+                          color: Colors.black,
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30))),
+                          child: Text(
+                            'Sign In',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 )
-              ],
-            ),
-          ),
+              : Container(
+                  padding: EdgeInsets.all(16),
+                  child: ListView.builder(
+                    itemCount: context.watch<Favorites>().count,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: EdgeInsets.symmetric(vertical: 8),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Image.asset(context
+                                  .watch<Favorites>()
+                                  .allFavs[index]
+                                  .imageReference),
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                      context
+                                          .watch<Favorites>()
+                                          .allFavs[index]
+                                          .name,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 18)),
+                                  Text(
+                                    context
+                                        .watch<Favorites>()
+                                        .allFavs[index]
+                                        .description,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 14),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
           navigationBar: CupertinoNavigationBar(
             middle: Text('Favorites'),
           ),
@@ -201,8 +260,8 @@ class _ShopHomeState extends State<ShopHome> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Center(
-                child: ProductPreview(
-                    Product('goat', true, colorProductImages[0]))),
+                child: ProductPreview(Product('goat', colorProductImages[0],
+                    'description', '\$9.99', false))),
           ),
         );
       },
@@ -318,8 +377,8 @@ Widget _buildProductRow(BuildContext context, String name, String description,
               itemCount: productImages.length,
               itemBuilder: (BuildContext context, int index) => Hero(
                   tag: productImages[index],
-                  child: ProductPreview(
-                      Product('name', false, productImages[index])))),
+                  child: ProductPreview(Product('name', productImages[index],
+                      'description of product', '\$24.00', false)))),
         ),
       ],
     ),

@@ -8,5 +8,5 @@ class Product {
   int numberOfSales;
   double rating;
 
-  Product(this.name, this.favorite, this.imageReference);
+  Product(this.name, this.imageReference, this.description, this.price, this.favorite);
 }

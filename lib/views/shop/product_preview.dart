@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:my_ios_app/model/shop/favorities.dart';
 import 'package:my_ios_app/model/shop/product.dart';
 import 'package:my_ios_app/views/shop/product_detail.dart';
+import 'package:provider/provider.dart';
 
 class ProductPreview extends StatefulWidget {
   final Product productModel;
@@ -38,9 +40,13 @@ class _ProductPreviewState extends State<ProductPreview> {
         GestureDetector(
           onTap: () {
             setState(() {
-              this.widget.productModel.favorite
-                  ? this.widget.productModel.favorite = false
-                  : this.widget.productModel.favorite = true;
+              this.widget.productModel.favorite =
+                  !this.widget.productModel.favorite;
+              if (this.widget.productModel.favorite) {
+                context
+                    .read<Favorites>()
+                    .addToFavorites(this.widget.productModel);
+              }
             });
           },
           child: Container(
