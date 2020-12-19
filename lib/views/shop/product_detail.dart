@@ -1,14 +1,6 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_ios_app/model/shop/product.dart';
-
-final List<String> productImages = [
-  'assets/shop/triangleProduct1.png',
-  'assets/shop/triangleProduct2.png',
-  'assets/shop/triangleProduct3.png',
-  'assets/shop/triangleProduct4.png'
-];
 
 class ProductDetail extends StatefulWidget {
   final Product productData;
@@ -25,6 +17,12 @@ class _ProductDetailsState extends State<ProductDetail> {
   bool isFavorite = false;
 
   @override
+  void initState() {
+    isFavorite = this.widget.productData.favorite;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
@@ -35,12 +33,10 @@ class _ProductDetailsState extends State<ProductDetail> {
             },
             child: CircleAvatar(
               backgroundColor: Colors.white,
-              child: Center(
-                child: Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.black,
-                  size: 18,
-                ),
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+                size: 18,
               ),
             ),
           ),
@@ -49,6 +45,7 @@ class _ProductDetailsState extends State<ProductDetail> {
             children: [
               CupertinoButton(
                 onPressed: () {},
+                padding: EdgeInsets.zero,
                 child: Icon(
                   CupertinoIcons.share,
                   color: Colors.white,
@@ -82,27 +79,15 @@ class _ProductDetailsState extends State<ProductDetail> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: 500,
-              child: CarouselSlider.builder(
-                  options: CarouselOptions(
-                      viewportFraction: 1,
-                      aspectRatio: 1 / 1,
-                      enableInfiniteScroll: false,
-                      reverse: false,
-                      initialPage: 1,
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      disableCenter: false),
-                  itemCount: 1,
-                  itemBuilder: (context, index) => Container(
-                        margin: EdgeInsets.symmetric(horizontal: 5.0),
-                        child: Center(
-                          child: Image.asset(
-                            this.widget.productData.imageReference,
-                            fit: BoxFit.fill,
-                            width: 500,
-                            height: 500,
-                          ),
-                        ),
-                      )),
+              child: Hero(
+                tag: this.widget.productData.imageReference,
+                child: Container(
+                  child: Image.asset(
+                    this.widget.productData.imageReference,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
             ),
             Container(
               margin: EdgeInsets.symmetric(vertical: 24, horizontal: 8),

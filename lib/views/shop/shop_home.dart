@@ -316,8 +316,10 @@ Widget _buildProductRow(BuildContext context, String name, String description,
                   autoPlayCurve: Curves.fastOutSlowIn,
                   disableCenter: false),
               itemCount: productImages.length,
-              itemBuilder: (BuildContext context, int index) =>
-                  ProductPreview(Product('name', false, productImages[index]))),
+              itemBuilder: (BuildContext context, int index) => Hero(
+                  tag: productImages[index],
+                  child: ProductPreview(
+                      Product('name', false, productImages[index])))),
         ),
       ],
     ),

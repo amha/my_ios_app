@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'iOS Demo',
       debugShowCheckedModeBanner: false,
       theme: CupertinoThemeData(
+          brightness: Brightness.light,
           primaryColor: CupertinoColors.systemPink,
           barBackgroundColor: CupertinoColors.systemGrey6,
           textTheme: CupertinoTextThemeData(

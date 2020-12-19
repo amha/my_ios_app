@@ -1,7 +1,12 @@
 class Product {
   String name;
-  bool favorite;
+  String description; 
   String imageReference;
+  bool favorite;
+  String price;
+  String sellerName;
+  int numberOfSales;
+  double rating;
 
   Product(this.name, this.favorite, this.imageReference);
 }
