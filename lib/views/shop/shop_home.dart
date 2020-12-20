@@ -1,11 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_ios_app/model/shop/favorites.dart';
 import 'package:my_ios_app/model/shop/product.dart';
 import 'package:my_ios_app/resources/shop_catalog.dart';
+import 'package:my_ios_app/views/shop/favorites.dart';
 import 'package:my_ios_app/views/shop/product_preview.dart';
-import 'package:provider/provider.dart';
+import 'package:my_ios_app/views/shop/shopping_cart.dart';
 
 class ShopHome extends StatefulWidget {
   @override
@@ -48,280 +48,18 @@ class _ShopHomeState extends State<ShopHome> {
         // setState(() {
         //   tabIndex = index;
         // });
-        return tabs[index];
+        if (index == 0) {
+          return _getStoreFront(context);
+        } else if (index == 1) {
+          return FavoritesTab();
+        } else if (index == 2) {
+          return _getProfileTab(context);
+        } else {
+          return ShoppingCart();
+        }
       },
     );
   }
-
-  List<CupertinoTabView> tabs = [
-    CupertinoTabView(
-      builder: (BuildContext context) {
-        return CupertinoPageScaffold(
-          backgroundColor: Colors.white,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 30,
-                ),
-                Container(
-                  height: 50,
-                  margin: EdgeInsets.all(16),
-                  width: MediaQuery.of(context).size.width,
-                  child: CupertinoSearchTextField(
-                    decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius: BorderRadius.all(Radius.circular(30))),
-                  ),
-                ),
-                Container(
-                  height: 250,
-                  width: MediaQuery.of(context).size.width,
-                  color: Colors.pink[50],
-                  child: Column(
-                    children: [
-                      Container(
-                        child: Text(
-                          'Welcome to the world\'s most imaginative marketplace',
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.w300),
-                          textAlign: TextAlign.center,
-                        ),
-                        margin: EdgeInsets.all(12),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(vertical: 8),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Sign up now to save your favorite items and get personalized recommendations',
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w400),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 60,
-                        width: 120,
-                        child: RaisedButton(
-                          color: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(30)),
-                          ),
-                          child: Text(
-                            'Sign up',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                          onPressed: () {},
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width,
-                        child: FlatButton(
-                          child: Text(
-                            'I already have an account',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).push(CupertinoPageRoute(
-                                builder: (context) => ShopHome()));
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                _buildProductRow(
-                    context,
-                    'Colors',
-                    'Choose your favorite gradient pattern',
-                    colorProductImages),
-                _buildProductRow(context, 'Triangles', 'Get your fav trigon',
-                    triangleProductImages),
-                _buildProductRow(context, 'Pentagons',
-                    '5 sides to express yourself', polygonProductImages),
-              ],
-            ),
-          ),
-        );
-      },
-    ),
-    CupertinoTabView(
-      builder: (BuildContext context) {
-        return CupertinoPageScaffold(
-          child: context.watch<Favorites>().count == 0
-              ? Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(8),
-                        child: Icon(
-                          CupertinoIcons.heart_slash,
-                          color: Colors.black,
-                          size: 80,
-                        ),
-                      ),
-                      Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 64, vertical: 8),
-                          child: Text(
-                            'Sign in to save your favorite items and shops.',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20),
-                            textAlign: TextAlign.center,
-                          )),
-                      Container(
-                        margin: EdgeInsets.symmetric(vertical: 16),
-                        height: 56,
-                        width: 200,
-                        child: RaisedButton(
-                          onPressed: () {},
-                          color: Colors.black,
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30))),
-                          child: Text(
-                            'Sign In',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              : Container(
-                  padding: EdgeInsets.all(16),
-                  child: ListView.builder(
-                    itemCount: context.watch<Favorites>().count,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.symmetric(vertical: 8),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Image.asset(context
-                                  .watch<Favorites>()
-                                  .allFavs[index]
-                                  .imageReference),
-                            ),
-                            Expanded(
-                              flex: 3,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                      context
-                                          .watch<Favorites>()
-                                          .allFavs[index]
-                                          .name,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 18)),
-                                  Text(
-                                    context
-                                        .watch<Favorites>()
-                                        .allFavs[index]
-                                        .description,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 14),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
-          navigationBar: CupertinoNavigationBar(
-            middle: Text('Favorites'),
-          ),
-        );
-      },
-    ),
-    CupertinoTabView(
-      builder: (BuildContext context) {
-        return CupertinoPageScaffold(
-          navigationBar: CupertinoNavigationBar(
-            middle: Text('You'),
-          ),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Center(
-                child: ProductPreview(Product('goat', colorProductImages[0],
-                    'description', '\$9.99', false))),
-          ),
-        );
-      },
-    ),
-    CupertinoTabView(
-      builder: (BuildContext context) {
-        return CupertinoPageScaffold(
-          navigationBar: CupertinoNavigationBar(
-            middle: Text('Cart'),
-          ),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Icon(
-                    CupertinoIcons.cart,
-                    color: Colors.black,
-                    size: 80,
-                  ),
-                ),
-                Padding(
-                    padding: EdgeInsets.all(8),
-                    child: Text(
-                      'You \'shopping cart is empty',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    )),
-                Padding(
-                    padding: EdgeInsets.all(8),
-                    child: Text(
-                      'Looking for ideas?',
-                      style: TextStyle(fontWeight: FontWeight.normal),
-                    )),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 16),
-                  height: 56,
-                  width: 200,
-                  child: RaisedButton(
-                    onPressed: () {},
-                    color: Colors.black,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30))),
-                    child: Text(
-                      'See what\' trending',
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-        );
-      },
-    )
-  ];
 
   @override
   void dispose() {
@@ -330,8 +68,129 @@ class _ShopHomeState extends State<ShopHome> {
   }
 }
 
+CupertinoTabView _getStoreFront(BuildContext context) {
+  return CupertinoTabView(
+    builder: (BuildContext context) {
+      return CupertinoPageScaffold(
+        backgroundColor: Colors.white,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                height: 50,
+                margin: EdgeInsets.all(16),
+                width: MediaQuery.of(context).size.width,
+                child: CupertinoSearchTextField(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                ),
+              ),
+              Container(
+                height: 250,
+                width: MediaQuery.of(context).size.width,
+                color: Colors.pink[50],
+                child: Column(
+                  children: [
+                    Container(
+                      child: Text(
+                        'Welcome to the world\'s most imaginative marketplace',
+                        style: TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.w300),
+                        textAlign: TextAlign.center,
+                      ),
+                      margin: EdgeInsets.all(12),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 8),
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Sign up now to save your favorite items and get personalized recommendations',
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w400),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 60,
+                      width: 120,
+                      child: RaisedButton(
+                        color: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                        ),
+                        child: Text(
+                          'Sign up',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.white),
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width,
+                      child: FlatButton(
+                        child: Text(
+                          'I already have an account',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(CupertinoPageRoute(
+                              builder: (context) => ShopHome()));
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              _buildProductRow(
+                  context,
+                  'Colors',
+                  'Choose your favorite gradient pattern',
+                  allProducts.sublist(0, 3)),
+              _buildProductRow(context, 'Triangles', 'Get your fav trigon',
+                  allProducts.sublist(4, 7)),
+              _buildProductRow(
+                  context,
+                  'Pentagons',
+                  '5 sides to express yourself',
+                  allProducts.sublist(
+                    8,
+                  )),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
+CupertinoTabView _getProfileTab(BuildContext context) {
+  return CupertinoTabView(
+    builder: (BuildContext context) {
+      return CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          middle: Text('You'),
+        ),
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: Center(
+              child: ProductPreview(Product('goat', colorProductImages[0],
+                  'description', '\$9.99', false))),
+        ),
+      );
+    },
+  );
+}
+
 Widget _buildProductRow(BuildContext context, String name, String description,
-    List<String> productImages) {
+    List<Product> products) {
   return Container(
     margin: EdgeInsets.symmetric(vertical: 16),
     height: 200,
@@ -365,21 +224,21 @@ Widget _buildProductRow(BuildContext context, String name, String description,
           height: 140,
           width: MediaQuery.of(context).size.width,
           child: CarouselSlider.builder(
-              options: CarouselOptions(
-                  viewportFraction: 0.4,
-                  aspectRatio: 3 / 2,
-                  enableInfiniteScroll: false,
-                  reverse: false,
-                  initialPage: 1,
-                  pageSnapping: true,
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  disableCenter: false),
-              itemCount: productImages.length,
-              itemBuilder: (BuildContext context, int index) => Hero(
-                  tag: productImages[index],
-                  child: ProductPreview(Product('name', productImages[index],
-                      'description of product', '\$24.00', false)))),
-        ),
+            options: CarouselOptions(
+                viewportFraction: 0.4,
+                aspectRatio: 3 / 2,
+                enableInfiniteScroll: false,
+                reverse: false,
+                initialPage: 1,
+                pageSnapping: true,
+                autoPlayCurve: Curves.fastOutSlowIn,
+                disableCenter: false),
+            itemCount: products.length,
+            itemBuilder: (BuildContext context, int index) => Hero(
+                tag: products[index].imageReference,
+                child: ProductPreview(products[index])),
+          ),
+        )
       ],
     ),
   );

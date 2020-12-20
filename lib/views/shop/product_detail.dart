@@ -152,7 +152,7 @@ class _ProductDetailsState extends State<ProductDetail> {
             Container(
               padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
               child: Text(
-                'Super awesome product name goes here and may wrap to a second line',
+                this.widget.productData.description,
                 style: TextStyle(
                   fontWeight: FontWeight.w300,
                   fontSize: 22,
@@ -165,7 +165,7 @@ class _ProductDetailsState extends State<ProductDetail> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '\$594.00',
+                    this.widget.productData.price,
                     style: TextStyle(
                         color: Colors.pink[900],
                         fontWeight: FontWeight.w700,
