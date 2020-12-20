@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_ios_app/views/music/music_home.dart';
+import 'package:my_ios_app/views/music/music_launcher.dart';
 import 'package:my_ios_app/views/shop/shop_launcher.dart';
-import 'package:my_ios_app/views/wallet/wallet_home.dart';
+import 'package:my_ios_app/views/wallet/wallet_launcher.dart';
 
 class App extends StatelessWidget {
   @override
@@ -63,10 +63,10 @@ class App extends StatelessWidget {
     Widget route;
     switch (name) {
       case 'Music':
-        route = MusicHome();
+        route = MusicLauncher();
         break;
       case 'Wallet':
-        route = WalletHome();
+        route = WalletLauncher();
         break;
       case 'Shop':
         route = ShopLauncher();
@@ -84,7 +84,7 @@ class App extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Container(
-                child: Image.asset(imagePath),
+                child: Hero(tag: '$name', child: Image.asset(imagePath)),
               ),
             ),
             Expanded(

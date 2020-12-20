@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:my_ios_app/model/shop/favorities.dart';
+import 'package:my_ios_app/model/shop/favorites.dart';
 import 'package:my_ios_app/model/shop/product.dart';
 import 'package:my_ios_app/views/shop/product_detail.dart';
 import 'package:provider/provider.dart';

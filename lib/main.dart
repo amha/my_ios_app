@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:my_ios_app/views/app.dart';
 import 'package:provider/provider.dart';
 
-import 'model/shop/favorities.dart';
+import 'model/shop/favorites.dart';
 
 void main() {
   runApp(MyApp());

@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:my_ios_app/views/shop/shop_home.dart';
+import 'package:my_ios_app/views/wallet/wallet_home.dart';
 
-import 'shop_home.dart';
+import 'wallet_home.dart';
 
-class ShopLauncher extends StatelessWidget {
+class WalletLauncher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -20,9 +20,9 @@ class ShopLauncher extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Hero(
-                tag: 'Shop',
+                tag: 'Wallet',
                 child: Image.asset(
-                  'assets/shopping_action.png',
+                  'assets/wallet_action.png',
                   width: 300,
                   height: 300,
                 ),
@@ -43,8 +43,8 @@ class ShopLauncher extends StatelessWidget {
                   CupertinoButton.filled(
                     borderRadius: BorderRadius.all(Radius.circular(24)),
                     onPressed: () {
-                      Navigator.of(context).push(
-                          CupertinoPageRoute(builder: (context) => ShopHome()));
+                      Navigator.of(context).push(CupertinoPageRoute(
+                          builder: (context) => WalletHome()));
                     },
                     child: Text('Open'),
                   ),

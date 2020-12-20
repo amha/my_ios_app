@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
-import 'package:my_ios_app/views/shop/shop_home.dart';
 
-import 'shop_home.dart';
+import 'music_home.dart';
 
-class ShopLauncher extends StatelessWidget {
+class MusicLauncher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         backgroundColor: CupertinoColors.white,
         border: Border.all(color: CupertinoColors.white),
+
       ),
       child: Container(
         margin: EdgeInsets.all(16),
@@ -20,9 +20,9 @@ class ShopLauncher extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Hero(
-                tag: 'Shop',
+                tag: 'Music',
                 child: Image.asset(
-                  'assets/shopping_action.png',
+                  'assets/music_action.png',
                   width: 300,
                   height: 300,
                 ),
@@ -43,8 +43,8 @@ class ShopLauncher extends StatelessWidget {
                   CupertinoButton.filled(
                     borderRadius: BorderRadius.all(Radius.circular(24)),
                     onPressed: () {
-                      Navigator.of(context).push(
-                          CupertinoPageRoute(builder: (context) => ShopHome()));
+                      Navigator.of(context).push(CupertinoPageRoute(
+                          builder: (context) => MusicHome()));
                     },
                     child: Text('Open'),
                   ),

@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_ios_app/model/shop/favorities.dart';
+import 'package:my_ios_app/model/shop/favorites.dart';
 import 'package:my_ios_app/model/shop/product.dart';
 import 'package:my_ios_app/resources/shop_catalog.dart';
 import 'package:my_ios_app/views/shop/product_preview.dart';
