@@ -105,7 +105,6 @@ class MusicHome extends StatelessWidget {
                                 CupertinoActionSheetAction(
                                   child: Text('Always shuffle'),
                                   onPressed: () {
-                                    print('always option pressed');
                                     Navigator.of(context).pop();
                                   },
                                 ),
@@ -113,7 +112,6 @@ class MusicHome extends StatelessWidget {
                               cancelButton: CupertinoActionSheetAction(
                                 child: Text('Cancel'),
                                 onPressed: () {
-                                  print('Cancel pressed');
                                   Navigator.of(context).pop();
                                 },
                               ),

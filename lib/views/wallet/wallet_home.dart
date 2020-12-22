@@ -108,7 +108,6 @@ class _WalletHomeState extends State<WalletHome> {
             GestureDetector(
               onTap: () {
                 //TODO add card
-                print('card 1 tapped');
               },
               child: Container(
                 margin: EdgeInsets.all(16),

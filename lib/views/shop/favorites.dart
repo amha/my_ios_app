@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:my_ios_app/model/shop/favorite_products.dart';
 import 'package:my_ios_app/model/shop/product.dart';
+import 'package:my_ios_app/views/shop/product_detail.dart';
 import 'package:provider/provider.dart';
 
 class FavoritesTab extends StatelessWidget {
@@ -74,7 +75,8 @@ class FavoritesTab extends StatelessWidget {
                               maxWidth: 250,
                               minWidth: 200),
                           child: _favoriteProductCard(
-                              context.watch<Favorites>().products[index]));
+                              context.watch<Favorites>().products[index],
+                              context));
                     },
                   ),
                 ),
@@ -86,7 +88,7 @@ class FavoritesTab extends StatelessWidget {
     );
   }
 
-  Widget _favoriteProductCard(Product product) {
+  Widget _favoriteProductCard(Product product, BuildContext context) {
     return Container(
       decoration: BoxDecoration(
           color: CupertinoColors.white,
@@ -102,10 +104,18 @@ class FavoritesTab extends StatelessWidget {
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(radius),
                 topRight: Radius.circular(radius)),
-            child: Image.asset(
-              product.imageReference,
-              fit: BoxFit.fitHeight,
-              height: 230,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(CupertinoPageRoute(
+                    builder: (context) => ProductDetail(
+                          productData: product,
+                        )));
+              },
+              child: Image.asset(
+                product.imageReference,
+                fit: BoxFit.fitHeight,
+                height: 230,
+              ),
             ),
           ),
           Container(
@@ -120,7 +130,7 @@ class FavoritesTab extends StatelessWidget {
                 children: [
                   Text(
                     product.name,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -148,13 +158,13 @@ class FavoritesTab extends StatelessWidget {
                       Text('(574 Reviews)')
                     ],
                   ),
-                  Text(
-                    'free shipping available',
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        backgroundColor: CupertinoColors.systemGrey3),
-                  ),
+                  // Text(
+                  //   'Free shipping available',
+                  //   style: TextStyle(
+                  //       fontSize: 14,
+                  //       fontWeight: FontWeight.w400,
+                  //       backgroundColor: Color(0xffECFBE5)),
+                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -162,11 +172,15 @@ class FavoritesTab extends StatelessWidget {
                       Text(
                         product.price,
                         style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w700),
+                            fontSize: 16, fontWeight: FontWeight.w600),
                       ),
-                      Icon(
-                        CupertinoIcons.ellipsis_vertical_circle_fill,
-                        color: CupertinoColors.black,
+                      CupertinoButton(
+                        padding: EdgeInsets.all(0),
+                        onPressed: () => helperFunction(context, product),
+                        child: Icon(
+                          CupertinoIcons.ellipsis,
+                          color: CupertinoColors.black,
+                        ),
                       )
                     ],
                   )
@@ -177,5 +191,53 @@ class FavoritesTab extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void helperFunction(BuildContext context, Product product) {
+    showCupertinoModalPopup(
+        context: context,
+        builder: (context) => CupertinoActionSheet(
+              actions: [
+                CupertinoActionSheetAction(
+                  isDestructiveAction: false,
+                  child: Text('Add to list'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                CupertinoActionSheetAction(
+                  child: Text('See similar items'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                CupertinoActionSheetAction(
+                  child: Text('Visit shop'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                CupertinoActionSheetAction(
+                  child: Text('Share'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                CupertinoActionSheetAction(
+                  child: Text('Remove from favorites'),
+                  isDestructiveAction: true,
+                  onPressed: () {
+                    context.read<Favorites>().removeProduct(product);
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+              cancelButton: CupertinoActionSheetAction(
+                child: Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ));
   }
 }

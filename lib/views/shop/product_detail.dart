@@ -216,7 +216,7 @@ class _ProductDetailsState extends State<ProductDetail> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(40))),
                     onPressed: () {
-                      print('added to card');
+                      //TODO add card
                     },
                     child: Text(
                       'Add to Cart',
@@ -283,7 +283,7 @@ class _ProductDetailsState extends State<ProductDetail> {
                           CupertinoIcons.pencil_circle,
                           size: 18,
                         ),
-                        Text('  Personalizable')
+                        Text('  Personalize')
                       ],
                     ),
                   ),

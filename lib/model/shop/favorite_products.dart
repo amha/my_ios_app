@@ -14,4 +14,9 @@ class Favorites with ChangeNotifier {
     products.add(product);
     notifyListeners();
   }
+
+  void removeProduct(Product product) {
+    products.removeWhere((products) => products.name == product.name);
+    notifyListeners();
+  }
 }
