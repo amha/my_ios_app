@@ -1,7 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_ios_app/model/wallet/card.dart';
 
 class CardSettings extends StatefulWidget {
+  final PaymentCard card;
+
+  CardSettings(this.card);
+
   @override
   State<StatefulWidget> createState() {
     return _CardSettingsState();
@@ -24,24 +29,24 @@ class _CardSettingsState extends State<CardSettings> {
         actionsForegroundColor: CupertinoColors.black,
         backgroundColor: CupertinoColors.systemGrey6,
         border: Border.all(width: 0.0, color: CupertinoColors.systemGrey6),
-        leading: CupertinoButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Icon(CupertinoIcons.back),
-        ),
+        automaticallyImplyLeading: true,
       ),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              height: 90,
               width: 120,
               margin: EdgeInsets.fromLTRB(16, 30, 16, 16),
               decoration: BoxDecoration(
-                  color: CupertinoColors.activeBlue,
                   borderRadius: BorderRadius.all(Radius.circular(10))),
+              child: Hero(
+                tag: this.widget.card.image,
+                child: Image.asset(
+                  this.widget.card.image,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
             Text(
               'Spender Credit Card',

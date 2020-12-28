@@ -1,9 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_ios_app/model/wallet/card.dart';
 import 'package:my_ios_app/views/wallet/card_settings.dart';
 import 'package:my_ios_app/views/wallet/transaction_detail.dart';
 
 class CardDetails extends StatefulWidget {
+  final PaymentCard card;
+
+  CardDetails(this.card);
+
   @override
   State<StatefulWidget> createState() {
     return _CardDetailsState();
@@ -53,15 +58,21 @@ class _CardDetailsState extends State<CardDetails>
               Navigator.of(context).pop();
               _primary.reverse();
             },
-            child: Text(
-              'Done',
-              textAlign: TextAlign.center,
+            child: Container(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Done',
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                ),
+                textAlign: TextAlign.start,
+              ),
             ),
           ),
           trailing: CupertinoButton(
             onPressed: () {
-              Navigator.of(context).push(
-                  CupertinoPageRoute(builder: (context) => CardSettings()));
+              Navigator.of(context).push(CupertinoPageRoute(
+                  builder: (context) => CardSettings(this.widget.card)));
             },
             child: Icon(
               CupertinoIcons.slider_horizontal_3,
@@ -76,7 +87,6 @@ class _CardDetailsState extends State<CardDetails>
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.fromLTRB(16, 30, 16, 16),
               decoration: BoxDecoration(
-                  color: CupertinoColors.activeBlue,
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                   boxShadow: [
                     BoxShadow(
@@ -84,9 +94,12 @@ class _CardDetailsState extends State<CardDetails>
                         blurRadius: 30,
                         color: Color(0x22000000))
                   ]),
-              child: Image.asset(
-                'assets/wallet/card.png',
-                fit: BoxFit.fill,
+              child: Hero(
+                tag: this.widget.card.image,
+                child: Image.asset(
+                  this.widget.card.image,
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
             Container(
@@ -106,11 +119,8 @@ class _CardDetailsState extends State<CardDetails>
                   borderRadius: BorderRadius.all(Radius.circular(12))),
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: transactionRow(
-                        'Wolt', 'Amha Pay', 'May 8, 2020', '\$40'),
-                  ),
+                  transactionRow(
+                      'Coffee Maker', 'Wallet', 'Dec 12, 2020', '\$12.00'),
                   Divider(
                     height: .4,
                     indent: 16,
@@ -118,11 +128,8 @@ class _CardDetailsState extends State<CardDetails>
                     thickness: .3,
                     color: Colors.black26,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: transactionRow(
-                        'Wolt', 'Amha Pay', 'May 8, 2020', '\$40'),
-                  ),
+                  transactionRow(
+                      'Juicer person', 'Debit Card', 'Dec 13, 2020', '\$23.00'),
                   Divider(
                     height: .4,
                     indent: 16,
@@ -130,23 +137,8 @@ class _CardDetailsState extends State<CardDetails>
                     thickness: .3,
                     color: Colors.black26,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: transactionRow(
-                        'Wolt', 'Amha Pay', 'May 8, 2020', '\$40'),
-                  ),
-                  Divider(
-                    height: .4,
-                    indent: 16,
-                    endIndent: 16,
-                    thickness: .3,
-                    color: Colors.black26,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: transactionRow(
-                        'Wolt', 'Amha Pay', 'May 8, 2020', '\$40'),
-                  )
+                  transactionRow(
+                      'Food delivery', 'Wallet', 'Dec 11, 2020', '\$53.00')
                 ],
               ),
             )
@@ -158,60 +150,64 @@ class _CardDetailsState extends State<CardDetails>
 
   Widget transactionRow(String merchantName, String paymentMode,
       String paymentDate, String amount) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(
-            CupertinoPageRoute(builder: (context) => TransactionDetail()));
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 4, 4, 4),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(CupertinoPageRoute(
+              builder: (context) =>
+                  TransactionDetail(amount, merchantName, paymentMode)));
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 4, 4, 4),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '$merchantName',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black,
+                        fontSize: 18),
+                  ),
+                  Text(
+                    '$paymentMode',
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: CupertinoColors.systemGrey,
+                        fontWeight: FontWeight.w400),
+                  ),
+                  Text(
+                    '$paymentDate',
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: CupertinoColors.systemGrey,
+                        fontWeight: FontWeight.w400),
+                  )
+                ],
+              ),
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  '$merchantName',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black,
-                      fontSize: 18),
+                  '$amount',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                 ),
-                Text(
-                  '$paymentMode',
-                  style: TextStyle(
-                      fontSize: 16,
-                      color: CupertinoColors.systemGrey,
-                      fontWeight: FontWeight.w400),
-                ),
-                Text(
-                  '$paymentDate',
-                  style: TextStyle(
-                      fontSize: 16,
-                      color: CupertinoColors.systemGrey,
-                      fontWeight: FontWeight.w400),
+                CupertinoButton(
+                  onPressed: () {},
+                  child: Icon(
+                    CupertinoIcons.chevron_forward,
+                    color: CupertinoColors.black,
+                  ),
                 )
               ],
-            ),
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                '$amount',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-              ),
-              CupertinoButton(
-                onPressed: () {},
-                child: Icon(
-                  CupertinoIcons.chevron_forward,
-                  color: CupertinoColors.black,
-                ),
-              )
-            ],
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

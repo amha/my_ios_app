@@ -2,6 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TransactionDetail extends StatelessWidget {
+  final String amount;
+  final String merchantName;
+  final String paymentType;
+
+  TransactionDetail(this.amount, this.merchantName, this.paymentType);
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -9,12 +15,7 @@ class TransactionDetail extends StatelessWidget {
       navigationBar: CupertinoNavigationBar(
         border: Border.all(color: CupertinoColors.systemGrey6),
         backgroundColor: CupertinoColors.systemGrey6,
-        leading: CupertinoButton(
-          child: Icon(CupertinoIcons.back),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
+        automaticallyImplyLeading: true,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -22,14 +23,14 @@ class TransactionDetail extends StatelessWidget {
           Container(
             alignment: Alignment.center,
             child: Text(
-              '\$40',
+              this.amount,
               style: TextStyle(fontSize: 80, fontWeight: FontWeight.w700),
             ),
           ),
           Container(
             margin: EdgeInsets.symmetric(vertical: 4),
             child: Text(
-              'Wolt',
+              this.merchantName,
               style: TextStyle(
                   fontSize: 18,
                   color: CupertinoColors.systemGrey,
@@ -65,7 +66,7 @@ class TransactionDetail extends StatelessWidget {
                       )),
                   Padding(
                       padding: const EdgeInsets.all(2.0),
-                      child: Text('Amha Pay Credit Card')),
+                      child: Text(this.paymentType)),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     child: Divider(
@@ -80,7 +81,7 @@ class TransactionDetail extends StatelessWidget {
                       Text('Total',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w700)),
-                      Text('\$40',
+                      Text(this.amount,
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w700))
                     ],

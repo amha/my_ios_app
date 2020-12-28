@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_ios_app/model/wallet/card.dart';
+import 'package:my_ios_app/resources/my_cards.dart';
 import 'package:my_ios_app/views/wallet/card_details.dart';
 
 class WalletHome extends StatefulWidget {
@@ -57,26 +59,31 @@ class _WalletHomeState extends State<WalletHome> {
                   Expanded(
                     flex: 5,
                     child: Container(
-                      padding: EdgeInsets.fromLTRB(24, 24, 24, 0),
-                      color: Colors.white,
+                      padding: EdgeInsets.fromLTRB(24, 16, 24, 0),
+                      color: CupertinoColors.black,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8),
-                            child: Text('WHAT\'S NEW'),
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            child: Text(
+                              'WHAT\'S NEW',
+                              style: TextStyle(color: CupertinoColors.white),
+                            ),
                           ),
                           Text(
-                            'Now send money to the whole family.',
+                            'Send Money Anywhere',
                             style: TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.w700),
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700,
+                                color: CupertinoColors.white),
                           ),
                           Container(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.asset(
-                              'assets/wallet/money.png',
-                              width: 320,
-                              fit: BoxFit.fill,
+                            child: Center(
+                              child: Image.asset(
+                                'assets/wallet/earth.png',
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           )
                         ],
@@ -91,7 +98,7 @@ class _WalletHomeState extends State<WalletHome> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Lean more about cash'),
+                          Text('Lean more about money'),
                           Text(
                             'START NOW',
                             style: TextStyle(
@@ -105,108 +112,40 @@ class _WalletHomeState extends State<WalletHome> {
                 ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                //TODO add card
-              },
-              child: Container(
-                margin: EdgeInsets.all(16),
-                child: Stack(
-                  children: [
-                    Container(
-                      height: 500,
-                      width: MediaQuery.of(context).size.width,
-                    ),
-                    Container(
-                      height: 250,
-                      width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                          color: CupertinoColors.black,
-                          borderRadius: BorderRadius.all(Radius.circular(15))),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Digital Cash',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
-                          )
-                        ],
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(PageRouteBuilder(
-                            opaque: false,
-                            pageBuilder: (context, _, __) {
-                              return CardDetails();
-                            }));
-                      },
-                      child: Container(
-                        height: 230,
-                        width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.all(16),
-                        margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                        decoration: BoxDecoration(
-                            color: CupertinoColors.activeBlue,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15))),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              flex: 4,
-                              child: Text(
-                                'Liberty Bank Credit Card',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    shadows: [
-                                      Shadow(
-                                          color: Colors.black54,
-                                          offset: Offset.zero,
-                                          blurRadius: 23)
-                                    ]),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    '****5938',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        shadows: [
-                                          Shadow(
-                                              color: Colors.black54,
-                                              offset: Offset.zero,
-                                              blurRadius: 23)
-                                        ]),
-                                  ),
-                                  Image.asset(
-                                      'assets/wallet/acceptanceMark.png')
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+            Container(
+              margin: EdgeInsets.all(16),
+              child: Stack(
+                children: [
+                  Container(
+                    height: 350,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                  Positioned(top: 0, child: _buildCard(cardsInWallet[1])),
+                  Positioned(bottom: 0, child: _buildCard(cardsInWallet[0])),
+                ],
               ),
             )
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildCard(PaymentCard card) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(PageRouteBuilder(
+            opaque: false,
+            pageBuilder: (context, _, __) {
+              return CardDetails(card);
+            }));
+      },
+      child: Container(
+          height: 230,
+          width: MediaQuery.of(context).size.width - 32,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(15))),
+          child: Image.asset(card.image, fit: BoxFit.fill)),
     );
   }
 }

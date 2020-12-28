@@ -53,9 +53,9 @@ flutter:
     - assets/shop/polygon3.png
     - assets/shop/polygon4.png
     - assets/shop/acceptance.png
-    - assets/wallet/acceptanceMark.png
-    - assets/wallet/money.png
+    - assets/wallet/earth.png
     - assets/wallet/card.png
+    - assets/wallet/card_two.png
     - assets/music_action.png
     - assets/shopping_action.png
     - assets/wallet_action.png
