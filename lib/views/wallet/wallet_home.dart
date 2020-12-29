@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_ios_app/model/wallet/card.dart';
 import 'package:my_ios_app/resources/my_cards.dart';
+import 'package:my_ios_app/views/wallet/add_card_type_selection.dart';
 import 'package:my_ios_app/views/wallet/card_details.dart';
 
 class WalletHome extends StatefulWidget {
@@ -36,7 +37,13 @@ class _WalletHomeState extends State<WalletHome> {
                         letterSpacing: -2),
                   ),
                   CupertinoButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(PageRouteBuilder(
+                          opaque: false,
+                          pageBuilder: (context, _, __) {
+                            return SelectCardType();
+                          }));
+                    },
                     child: Icon(
                       CupertinoIcons.add_circled_solid,
                       color: CupertinoColors.black,
