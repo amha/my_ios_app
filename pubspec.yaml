@@ -45,5 +45,6 @@ flutter:
     - assets/wallet/card_two.png
     - assets/shopping_action.png
     - assets/wallet_action.png
+    - assets/wallet/add_card_promo.png
 
 
