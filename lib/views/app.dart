@@ -1,6 +1,9 @@
+// Copyright 2021 Amha Mogus. All rights reserved.
+// Use of this source code is governed by the MIT license that can be found
+// in the LICENSE file.
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_ios_app/views/music/music_launcher.dart';
 import 'package:my_ios_app/views/shop/shop_launcher.dart';
 import 'package:my_ios_app/views/wallet/wallet_launcher.dart';
 
@@ -34,7 +37,7 @@ class App extends StatelessWidget {
                   CupertinoButton(
                     onPressed: () {},
                     child: Icon(
-                      CupertinoIcons.info_circle_fill,
+                      CupertinoIcons.info,
                       color: CupertinoColors.black,
                       size: 28,
                     ),
@@ -44,8 +47,6 @@ class App extends StatelessWidget {
             ),
             Column(
               children: [
-                _demoRow(context, 'Music', 'Audio Playback',
-                    'assets/music_action.png'),
                 _demoRow(
                     context, 'Wallet', 'Payments', 'assets/wallet_action.png'),
                 _demoRow(
@@ -62,9 +63,6 @@ class App extends StatelessWidget {
       BuildContext context, String name, String description, String imagePath) {
     Widget route;
     switch (name) {
-      case 'Music':
-        route = MusicLauncher();
-        break;
       case 'Wallet':
         route = WalletLauncher();
         break;

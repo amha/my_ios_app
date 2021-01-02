@@ -1,5 +1,10 @@
+// Copyright 2021 Amha Mogus. All rights reserved.
+// Use of this source code is governed by the MIT license that can be found
+// in the LICENSE file.
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_ios_app/resources/styles.dart';
 import 'package:my_ios_app/resources/wallet_components.dart';
 import 'package:my_ios_app/views/wallet/add_card_terms.dart';
 
@@ -39,6 +44,8 @@ class _SelectCardTypeState extends State<SelectCardType>
 
   @override
   Widget build(BuildContext context) {
+    final themeData = CupertinoTheme.of(context);
+
     return CupertinoFullscreenDialogTransition(
       primaryRouteAnimation: _primary,
       secondaryRouteAnimation: _secondary,
@@ -47,7 +54,9 @@ class _SelectCardTypeState extends State<SelectCardType>
           navigationBar: CupertinoNavigationBar(
             middle: Text('Add Card'),
             backgroundColor: CupertinoTheme.of(context).barBackgroundColor,
-            automaticallyImplyLeading: true,
+            automaticallyImplyLeading: false,
+            previousPageTitle: 'Back',
+            border: Styles.navBarBorder(themeData),
           ),
           child: Column(
             children: [
