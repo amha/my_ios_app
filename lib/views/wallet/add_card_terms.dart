@@ -4,7 +4,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:my_ios_app/resources/wallet_components.dart';
-import 'package:my_ios_app/views/wallet/add_card_form_step_1.dart';
+import 'package:my_ios_app/views/wallet/add_card_step_1.dart';
 
 class PresentTerms extends StatelessWidget {
   @override
@@ -53,7 +53,7 @@ class PresentTerms extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                           onPressed: () {
                             Navigator.of(context).push(CupertinoPageRoute(
-                                builder: (context) => CardFormStep1()));
+                                builder: (context) => AddCardStep1()));
                           },
                           child: Text('Continue'),
                         ),

@@ -7,33 +7,42 @@ import 'package:flutter/material.dart';
 import 'package:my_ios_app/resources/styles.dart';
 import 'package:my_ios_app/resources/wallet_components.dart';
 
-class CardFormStep2 extends StatefulWidget {
+import 'add_card_step_2.dart';
+
+class AddCardStep1 extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _CardFormStep2State();
+    return _AddCardStep1State();
   }
 }
 
-class _CardFormStep2State extends State<CardFormStep2> {
-  TextEditingController _securityCodeController = TextEditingController();
-  String date = '';
+class _AddCardStep1State extends State<AddCardStep1> {
+  TextEditingController _userNameController = TextEditingController();
+  TextEditingController _cardNumberController = TextEditingController();
+
+  bool isUserNameValid = false;
+  bool isCardNumberValid = false;
 
   @override
   void initState() {
     super.initState();
-    _securityCodeController.addListener(securityCodeValidator);
+    _userNameController.addListener(checkUserName);
+    _cardNumberController.addListener(checkCardNumber);
   }
 
   @override
   void dispose() {
-    _securityCodeController.dispose();
+    _userNameController.dispose();
+    _cardNumberController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final themeData = CupertinoTheme.of(context);
-    print('build');
+
+    final String title = 'Card details';
+    final String description = 'Verify and complete your card information';
 
     return CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
@@ -42,9 +51,18 @@ class _CardFormStep2State extends State<CardFormStep2> {
             automaticallyImplyLeading: true,
             previousPageTitle: 'Back',
             trailing: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  if (isCardNumberValid) {
+                    Navigator.of(context).push(CupertinoPageRoute(
+                        builder: (context) => AddCardStep2(
+                            _userNameController.text,
+                            _cardNumberController.text)));
+                  }
+                },
                 child: Text('Next',
-                    style: Styles.disabledNavigationText(themeData)))),
+                    style: isCardNumberValid
+                        ? Styles.enabledNavigationText(themeData)
+                        : Styles.disabledNavigationText(themeData)))),
         child: Container(
           width: MediaQuery.of(context).size.width,
           child: Column(
@@ -57,19 +75,25 @@ class _CardFormStep2State extends State<CardFormStep2> {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                          flex: 1,
+                          flex: 2,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 24),
-                            child: Text('Expiration Date',
+                            child: Text('Name',
                                 style: Styles.formLabel(themeData)),
                           )),
                       Expanded(
-                          flex: 1,
-                          child: GestureDetector(
-                              onTap: () {
-                                showPicker(context);
-                              },
-                              child: Text('$date'))),
+                        flex: 3,
+                        child: CupertinoTextField(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 0.0, color: const Color(0xFFFFFFFF)),
+                            ),
+                            autofocus: false,
+                            controller: _userNameController,
+                            clearButtonMode: OverlayVisibilityMode.editing,
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.text),
+                      ),
                     ],
                   ),
                 ),
@@ -82,19 +106,20 @@ class _CardFormStep2State extends State<CardFormStep2> {
                           flex: 2,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 24),
-                            child: Text('Security Code',
+                            child: Text('Card Number',
                                 style: Styles.formLabel(themeData)),
                           )),
                       Expanded(
                           flex: 3,
                           child: CupertinoTextField(
-                              controller: _securityCodeController,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                     width: 0.0, color: const Color(0xFFFFFFFF)),
                               ),
                               autofocus: false,
-                              textInputAction: TextInputAction.done,
+                              maxLength: 16,
+                              controller: _cardNumberController,
+                              textInputAction: TextInputAction.next,
                               keyboardType: TextInputType.number)),
                     ],
                   ),
@@ -104,30 +129,26 @@ class _CardFormStep2State extends State<CardFormStep2> {
         ));
   }
 
-  void securityCodeValidator() {
-    //TODO
+  void checkUserName() {
+    String input = _userNameController.text;
+    RegExp reggie = RegExp(r'[0-9]');
+    if (input.length > 5 && !reggie.hasMatch(input)) {
+      isUserNameValid = true;
+    } else {
+      isUserNameValid = false;
+    }
   }
 
-  void showPicker(BuildContext context) {
-    showCupertinoModalPopup(
-      context: context,
-      builder: (context) => Container(
-        color: CupertinoColors.white,
-        height: 400,
-        child: CupertinoDatePicker(
-            initialDateTime: DateTime.now(),
-            mode: CupertinoDatePickerMode.date,
-            minimumYear: 2020,
-            maximumYear: 2028,
-            onDateTimeChanged: (val) {
-              setState(() {
-                date = val.toString();
-              });
-            }),
-      ),
-    );
+  void checkCardNumber() {
+    String input = _cardNumberController.text;
+    if (input.length > 5) {
+      setState(() {
+        isCardNumberValid = true;
+      });
+    } else {
+      setState(() {
+        isCardNumberValid = false;
+      });
+    }
   }
-
-  final String title = 'Card details';
-  final String description = 'Enter your card information.';
 }
