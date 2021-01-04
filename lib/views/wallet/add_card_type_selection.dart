@@ -52,10 +52,15 @@ class _SelectCardTypeState extends State<SelectCardType>
       linearTransition: false,
       child: CupertinoPageScaffold(
           navigationBar: CupertinoNavigationBar(
-            middle: Text('Add Card'),
             backgroundColor: CupertinoTheme.of(context).barBackgroundColor,
-            automaticallyImplyLeading: false,
-            previousPageTitle: 'Back',
+            leading: CupertinoButton(
+                padding: EdgeInsets.all(0),
+                onPressed: () {
+                  _primary.reverse();
+                  Navigator.of(context).pop();
+                },
+                child: Text('Cancel',
+                    style: Styles.enabledNavigationText(themeData))),
             border: Styles.navBarBorder(themeData),
           ),
           child: Column(
@@ -90,7 +95,10 @@ class _SelectCardTypeState extends State<SelectCardType>
                         child: Container(
                           height: 40,
                           width: 60,
-                          color: CupertinoColors.black,
+                          decoration: BoxDecoration(
+                            color: CupertinoColors.black,
+                            borderRadius: Styles.roundedCorners(themeData),
+                          ),
                           margin: EdgeInsets.symmetric(horizontal: 16),
                         ),
                       ),
@@ -124,7 +132,10 @@ class _SelectCardTypeState extends State<SelectCardType>
                         child: Container(
                           height: 40,
                           width: 60,
-                          color: CupertinoColors.black,
+                          decoration: BoxDecoration(
+                            color: CupertinoColors.black,
+                            borderRadius: Styles.roundedCorners(themeData),
+                          ),
                           margin: EdgeInsets.symmetric(horizontal: 16),
                         ),
                       ),
@@ -167,14 +178,17 @@ class _SelectCardTypeState extends State<SelectCardType>
                         child: Container(
                           height: 40,
                           width: 60,
-                          color: Color(0xffFFA700),
+                          decoration: BoxDecoration(
+                            color: Color(0xfaaa44aa),
+                            borderRadius: Styles.roundedCorners(themeData),
+                          ),
                           margin: EdgeInsets.symmetric(horizontal: 16),
                         ),
                       ),
                       Expanded(
                         flex: 3,
                         child: Text(
-                          'Music App',
+                          'Super Bank App ',
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w500),
                         ),
@@ -201,14 +215,17 @@ class _SelectCardTypeState extends State<SelectCardType>
                         child: Container(
                           height: 40,
                           width: 60,
-                          color: CupertinoColors.systemGreen,
+                          decoration: BoxDecoration(
+                            color: CupertinoColors.systemGreen,
+                            borderRadius: Styles.roundedCorners(themeData),
+                          ),
                           margin: EdgeInsets.symmetric(horizontal: 16),
                         ),
                       ),
                       Expanded(
                         flex: 3,
                         child: Text(
-                          'Shopping App',
+                          'Shape Shopper',
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w500),
                         ),

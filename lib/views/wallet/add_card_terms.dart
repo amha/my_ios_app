@@ -3,32 +3,39 @@
 // in the LICENSE file.
 
 import 'package:flutter/cupertino.dart';
+import 'package:my_ios_app/resources/styles.dart';
 import 'package:my_ios_app/resources/wallet_components.dart';
 import 'package:my_ios_app/views/wallet/add_card_step_1.dart';
 
 class PresentTerms extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final CupertinoThemeData themeData = CupertinoTheme.of(context);
+
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
-            automaticallyImplyLeading: true,
-            backgroundColor: CupertinoTheme.of(context).barBackgroundColor,
-            previousPageTitle: 'Back'),
+          backgroundColor: CupertinoTheme.of(context).barBackgroundColor,
+          border: Styles.navBarBorder(themeData),
+          previousPageTitle: 'Back',
+          automaticallyImplyLeading: true,
+        ),
         child: Column(
           children: [
             Expanded(
-              flex: 1,
+              flex: 2,
               child: Container(
                 height: 300,
                 width: MediaQuery.of(context).size.width,
                 color: CupertinoTheme.of(context).barBackgroundColor,
                 alignment: Alignment.bottomLeft,
                 child: Image.asset('assets/wallet/add_card_promo.png',
-                    fit: BoxFit.contain),
+                    width: screenWidth, fit: BoxFit.cover),
               ),
             ),
             Expanded(
-                flex: 1,
+                flex: 3,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

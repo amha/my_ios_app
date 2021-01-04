@@ -10,9 +10,12 @@ abstract class Styles {
       primaryColor: CupertinoColors.systemPink,
       barBackgroundColor: CupertinoColors.systemGrey6,
       textTheme: CupertinoTextThemeData(
-        actionTextStyle: TextStyle(
-            color: CupertinoColors.systemPink, fontWeight: FontWeight.w600),
-      ));
+          actionTextStyle: TextStyle(
+              color: CupertinoColors.systemPink, fontWeight: FontWeight.w600),
+          navActionTextStyle: TextStyle(
+              color: CupertinoColors.systemPink,
+              fontWeight: FontWeight.w600,
+              fontSize: 16)));
 
   static Border navBarBorder(CupertinoThemeData themeData) {
     return Border.all(width: 0.0, color: CupertinoColors.systemGrey6);
@@ -22,21 +25,25 @@ abstract class Styles {
     return CupertinoColors.white;
   }
 
-  static TextStyle formLabel(CupertinoThemeData themeData) {
-    return TextStyle(fontSize: 18, fontWeight: FontWeight.w500);
-  }
-
   static TextStyle disabledNavigationText(CupertinoThemeData themeData) {
     return TextStyle(
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: FontWeight.w600,
         color: CupertinoColors.systemGrey3);
   }
 
   static TextStyle enabledNavigationText(CupertinoThemeData themeData) {
     return TextStyle(
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: FontWeight.w600,
         color: CupertinoColors.systemPink);
+  }
+
+  static TextStyle formLabel(CupertinoThemeData themeData) {
+    return TextStyle(fontSize: 18, fontWeight: FontWeight.w500);
+  }
+
+  static BorderRadius roundedCorners(CupertinoThemeData themeData) {
+    return BorderRadius.all(Radius.circular(8));
   }
 }

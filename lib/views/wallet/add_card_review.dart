@@ -4,8 +4,11 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_ios_app/model/wallet/card.dart';
 import 'package:my_ios_app/resources/styles.dart';
 import 'package:my_ios_app/resources/wallet_components.dart';
+
+import 'card_details.dart';
 
 class ReviewCardDetails extends StatefulWidget {
   final String userName;
@@ -128,7 +131,23 @@ class _ReviewCardDetailsState extends State<ReviewCardDetails> {
                         child: CupertinoButton.filled(
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                             onPressed: () {
-                              //TODO: create new card, add to wallet, and launch card detail
+                              PaymentCard newCard = PaymentCard(
+                                  widget.cardNumber,
+                                  widget.userName,
+                                  'assets/wallet/card.png',
+                                  'Debit');
+                              showCupertinoDialog(
+                                  context: context,
+                                  builder: (context) => CupertinoPopupSurface(
+                                      isSurfacePainted: true,
+                                      child: CupertinoActivityIndicator(
+                                          animating: true)));
+                              Future.delayed(const Duration(seconds: 2), () {
+                                Navigator.of(context).pop();
+                                Navigator.of(context).push(CupertinoPageRoute(
+                                    builder: (context) =>
+                                        CardDetails(newCard)));
+                              });
                             },
                             child: Text('Submit')),
                       )))
