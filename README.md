@@ -8,14 +8,15 @@ Flutter is an excellent tool to __quickly__ build high quality product experienc
 
 ## Use Cases 
 - Wallet: Add card to wallet
-
+<br />
+ 
 <div display="flex" style="padding:30px;">
   <img src="/hype/wallet_home.png" width="250"/>
   &nbsp;
   <img src="/hype/card_details.png" width="250"/>
 </div>
 
-\n
+<br />
 - Shop: Add to favorites
 
 <div display="flex" style="padding:30px;">
