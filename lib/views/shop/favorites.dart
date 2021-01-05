@@ -46,9 +46,8 @@ class FavoritesTab extends StatelessWidget {
                         margin: EdgeInsets.symmetric(vertical: 16),
                         height: 56,
                         width: 200,
-                        child: CupertinoButton(
+                        child: CupertinoButton.filled(
                           onPressed: () {},
-                          color: CupertinoColors.black,
                           borderRadius: BorderRadius.all(Radius.circular(30)),
                           child: Text(
                             'Sign In',
@@ -118,14 +117,15 @@ class FavoritesTab extends StatelessWidget {
               child: Image.asset(
                 product.imageReference,
                 fit: BoxFit.fitHeight,
-                height: 230,
+                height: 220,
               ),
             ),
           ),
           Container(
-            height: 104,
+            height: 100,
             width: 200,
             color: CupertinoColors.white,
+            alignment: Alignment.bottomCenter,
             child: Padding(
               padding: EdgeInsets.all(8),
               child: Column(
@@ -159,7 +159,10 @@ class FavoritesTab extends StatelessWidget {
                         color: Colors.black,
                         size: 18,
                       ),
-                      Text('(574 Reviews)')
+                      Text(
+                        '574 Reviews',
+                        overflow: TextOverflow.clip,
+                      )
                     ],
                   ),
                   // Text(
@@ -176,7 +179,7 @@ class FavoritesTab extends StatelessWidget {
                       Text(
                         product.price,
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w600),
+                            fontSize: 15, fontWeight: FontWeight.w600),
                       ),
                       CupertinoButton(
                         padding: EdgeInsets.all(0),

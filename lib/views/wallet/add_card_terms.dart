@@ -4,7 +4,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:my_ios_app/resources/styles.dart';
-import 'package:my_ios_app/resources/wallet_components.dart';
+import 'package:my_ios_app/resources/standard_components.dart';
 import 'package:my_ios_app/views/wallet/add_card_step_1.dart';
 
 class PresentTerms extends StatelessWidget {

@@ -34,11 +34,20 @@ class ShopLauncher extends StatelessWidget {
             ),
             Expanded(
               flex: 1,
-              child: Center(
-                  child: Text(
-                'Discover new music\n Listen to your favorite artists',
-                textAlign: TextAlign.center,
-              )),
+              child: Column(children: <Widget>[
+                Center(
+                    child: Text('Shopping Demo',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.w600))),
+                Center(
+                    child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  child: Text('Discover New Products\n Find the perfect gift',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20)),
+                ))
+              ]),
             ),
             Expanded(
               flex: 1,
@@ -54,7 +63,9 @@ class ShopLauncher extends StatelessWidget {
                   ),
                   CupertinoButton(
                     borderRadius: BorderRadius.all(Radius.circular(24)),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
                     child: Text('Go back'),
                   )
                 ],

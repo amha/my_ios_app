@@ -5,7 +5,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_ios_app/resources/styles.dart';
-import 'package:my_ios_app/resources/wallet_components.dart';
+import 'package:my_ios_app/resources/standard_components.dart';
 import 'package:my_ios_app/views/wallet/add_card_terms.dart';
 
 class SelectCardType extends StatefulWidget {

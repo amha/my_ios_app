@@ -6,7 +6,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_ios_app/model/shop/product.dart';
-import 'package:my_ios_app/resources/shop_catalog.dart';
+import 'package:my_ios_app/resources/product_catalog.dart';
 import 'package:my_ios_app/views/shop/favorites.dart';
 import 'package:my_ios_app/views/shop/product_preview.dart';
 import 'package:my_ios_app/views/shop/shopping_cart.dart';
@@ -184,9 +184,24 @@ CupertinoTabView _getProfileTab(BuildContext context) {
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          child: Center(
-              child: ProductPreview(Product('goat', colorProductImages[0],
-                  'description', '\$9.99', false))),
+          child: ListView(children: <Widget>[
+            Padding(
+                padding: EdgeInsets.all(24),
+                child: Text('Profile')),
+            Divider(height: 1, thickness: .4),
+            Padding(
+                padding: EdgeInsets.all(24),
+                child: Text('Purchases & Reviews')),
+            Divider(height: 1, thickness: .4),
+            Padding(
+                padding: EdgeInsets.all(24),
+                child: Text('Settings')),
+            Divider(height: 1, thickness: .4),
+            Padding(
+                padding: EdgeInsets.all(24),
+                child: Text('Help')),
+            Divider(height: 1, thickness: .4),
+          ]),
         ),
       );
     },

@@ -47,8 +47,9 @@ class ShoppingCart extends StatelessWidget {
                   child: CupertinoButton.filled(
                     onPressed: () {},
                     borderRadius: BorderRadius.all(Radius.circular(24)),
+                    padding: EdgeInsets.all(0),
                     child: Text(
-                      'See what\' trending',
+                      'See what\'s trending',
                       style: TextStyle(
                           color: CupertinoColors.white,
                           fontWeight: FontWeight.bold),

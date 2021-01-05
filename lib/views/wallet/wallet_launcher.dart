@@ -34,11 +34,21 @@ class WalletLauncher extends StatelessWidget {
             ),
             Expanded(
               flex: 1,
-              child: Center(
+              child: Column(children: <Widget>[
+                Center(
+                    child: Text('Wallet Demo',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.w600))),
+                Center(
+                    child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Text(
-                'Discover new music\n Listen to your favorite artists',
-                textAlign: TextAlign.center,
-              )),
+                      'Pay with Wallet\n Send money anywhere in the world',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20)),
+                ))
+              ]),
             ),
             Expanded(
               flex: 1,
@@ -54,7 +64,9 @@ class WalletLauncher extends StatelessWidget {
                   ),
                   CupertinoButton(
                     borderRadius: BorderRadius.all(Radius.circular(24)),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
                     child: Text('Go back'),
                   )
                 ],

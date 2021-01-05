@@ -19,29 +19,28 @@ class App extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              height: 80,
-              margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+              height: 110,
               width: screenWidth,
+              margin: EdgeInsets.fromLTRB(0, 50, 0, 8),
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'iOS Demo',
+                    'Declarative UI Demo',
                     style: TextStyle(
-                        fontSize: 42,
-                        fontWeight: FontWeight.w600,
+                        fontSize: 36,
+                        fontWeight: FontWeight.w500,
                         letterSpacing: -2),
                   ),
-                  CupertinoButton(
-                    onPressed: () {},
-                    child: Icon(
-                      CupertinoIcons.info,
-                      color: CupertinoColors.black,
-                      size: 28,
-                    ),
-                  )
+                  Text(
+                    'Familiar experiences to showcase flutter.',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: -1),
+                  ),
                 ],
               ),
             ),
