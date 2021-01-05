@@ -24,7 +24,7 @@ Flutter is an excellent tool to __quickly__ build high quality product experienc
 </div>
 
 
-## Licence
+## License
 
 ```
 MIT License Copyright (c) 2021 Amha Mogus
