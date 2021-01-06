@@ -75,6 +75,7 @@ class _CardDetailsState extends State<CardDetails>
           ),
           trailing: CupertinoButton(
             onPressed: () {
+              FocusScope.of(context).unfocus();
               Navigator.of(context).push(CupertinoPageRoute(
                   builder: (context) => CardSettings(this.widget.card)));
             },
@@ -84,69 +85,71 @@ class _CardDetailsState extends State<CardDetails>
             ),
           ),
         ),
-        child: Column(
-          children: [
-            Container(
-              height: 250,
-              width: MediaQuery.of(context).size.width,
-              margin: EdgeInsets.fromLTRB(16, 30, 16, 16),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                  boxShadow: [
-                    BoxShadow(
-                        spreadRadius: 10,
-                        blurRadius: 30,
-                        color: Color(0x22000000))
-                  ]),
-              child: Hero(
-                tag: this.widget.card.image,
-                child: Image.asset(
-                  this.widget.card.image,
-                  fit: BoxFit.fill,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                height: 250,
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.fromLTRB(16, 30, 16, 16),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    boxShadow: [
+                      BoxShadow(
+                          spreadRadius: 10,
+                          blurRadius: 30,
+                          color: Color(0x22000000))
+                    ]),
+                child: Hero(
+                  tag: this.widget.card.image,
+                  child: Image.asset(
+                    this.widget.card.image,
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.all(16),
-              child: Text(
-                'Latest Transactions',
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: CupertinoColors.black),
+              Container(
+                margin: EdgeInsets.all(16),
+                child: Text(
+                  'Latest Transactions',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: CupertinoColors.black),
+                ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(12))),
-              child: Column(
-                children: [
-                  transactionRow(
-                      'Coffee Maker', 'Wallet', 'Dec 12, 2020', '\$12.00'),
-                  Divider(
-                    height: .4,
-                    indent: 16,
-                    endIndent: 16,
-                    thickness: .3,
-                    color: Colors.black26,
-                  ),
-                  transactionRow(
-                      'Juicer person', 'Debit Card', 'Dec 13, 2020', '\$23.00'),
-                  Divider(
-                    height: .4,
-                    indent: 16,
-                    endIndent: 16,
-                    thickness: .3,
-                    color: Colors.black26,
-                  ),
-                  transactionRow(
-                      'Food delivery', 'Wallet', 'Dec 11, 2020', '\$53.00')
-                ],
-              ),
-            )
-          ],
+              Container(
+                margin: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(12))),
+                child: Column(
+                  children: [
+                    transactionRow(
+                        'Coffee Maker', 'Wallet', 'Dec 12, 2020', '\$12.00'),
+                    Divider(
+                      height: .4,
+                      indent: 16,
+                      endIndent: 16,
+                      thickness: .3,
+                      color: Colors.black26,
+                    ),
+                    transactionRow('Juicer person', 'Debit Card',
+                        'Dec 13, 2020', '\$23.00'),
+                    Divider(
+                      height: .4,
+                      indent: 16,
+                      endIndent: 16,
+                      thickness: .3,
+                      color: Colors.black26,
+                    ),
+                    transactionRow(
+                        'Food delivery', 'Wallet', 'Dec 11, 2020', '\$53.00')
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

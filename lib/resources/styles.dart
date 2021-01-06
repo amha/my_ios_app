@@ -40,7 +40,26 @@ abstract class Styles {
   }
 
   static TextStyle formLabel(CupertinoThemeData themeData) {
-    return TextStyle(fontSize: 18, fontWeight: FontWeight.w500);
+    return TextStyle(
+        fontSize: 18, fontWeight: FontWeight.w500, letterSpacing: -1);
+  }
+
+  static BorderRadius buttonShape(CupertinoThemeData themeData) {
+    return BorderRadius.all(Radius.circular(16));
+  }
+
+  static TextStyle buttonText(CupertinoThemeData themeData) {
+    return TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
+        color: CupertinoColors.white);
+  }
+
+  static TextStyle deleteActionText(CupertinoThemeData themeData) {
+    return TextStyle(
+        color: CupertinoColors.systemRed,
+        fontSize: 16,
+        fontWeight: FontWeight.w600);
   }
 
   static BorderRadius roundedCorners(CupertinoThemeData themeData) {

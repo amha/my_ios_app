@@ -5,8 +5,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_ios_app/model/wallet/card.dart';
-import 'package:my_ios_app/resources/styles.dart';
 import 'package:my_ios_app/resources/standard_components.dart';
+import 'package:my_ios_app/resources/styles.dart';
 
 import 'card_details.dart';
 
@@ -46,111 +46,124 @@ class _ReviewCardDetailsState extends State<ReviewCardDetails> {
                 },
                 child: Text('Cancel',
                     style: Styles.enabledNavigationText(themeData)))),
-        child: Container(
-            width: screenWidth,
-            child: Column(children: <Widget>[
-              formHeader('$title', '$description'),
-              Container(
-                  height: 200,
-                  width: screenWidth,
-                  margin: EdgeInsets.fromLTRB(64, 0, 64, 16),
-                  decoration: BoxDecoration(
-                      color: CupertinoColors.black,
-                      borderRadius: BorderRadius.all(Radius.circular(20)))),
-              Divider(height: 1, thickness: .5),
-              Container(
-                height: 60,
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                        flex: 2,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
-                          child:
-                              Text('Name', style: Styles.formLabel(themeData)),
-                        )),
-                    Expanded(flex: 3, child: Text(widget.userName)),
-                  ],
-                ),
+        child: Column(children: <Widget>[
+          formHeader('$title', '$description'),
+          Expanded(
+            flex: 3,
+            child: Container(
+                height: 200,
+                width: screenWidth,
+                margin: EdgeInsets.fromLTRB(64, 0, 64, 16),
+                decoration: BoxDecoration(
+                    color: CupertinoColors.black,
+                    borderRadius: BorderRadius.all(Radius.circular(20)))),
+          ),
+          Divider(height: 1, thickness: .5),
+          Expanded(
+            flex: 1,
+            child: Container(
+              height: 60,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Text('Name', style: Styles.formLabel(themeData)),
+                      )),
+                  Expanded(flex: 3, child: Text(widget.userName)),
+                ],
               ),
-              Divider(height: 1, thickness: .5, indent: 36),
-              Container(
-                height: 60,
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                        flex: 2,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
-                          child: Text('Card Number',
-                              style: Styles.formLabel(themeData)),
-                        )),
-                    Expanded(flex: 3, child: Text(widget.cardNumber)),
-                  ],
-                ),
+            ),
+          ),
+          Divider(height: 1, thickness: .5, indent: 36),
+          Expanded(
+            flex: 1,
+            child: Container(
+              height: 60,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Text('Card Number',
+                            style: Styles.formLabel(themeData)),
+                      )),
+                  Expanded(flex: 3, child: Text(widget.cardNumber)),
+                ],
               ),
-              Divider(height: 1, thickness: .5, indent: 36),
-              Container(
-                height: 60,
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                        flex: 2,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 24, right: 0),
-                          child: Text('Expiration Date',
-                              style: Styles.formLabel(themeData)),
-                        )),
-                    Expanded(flex: 3, child: Text(widget.expirationDate)),
-                  ],
-                ),
+            ),
+          ),
+          Divider(height: 1, thickness: .5, indent: 36),
+          Expanded(
+            flex: 1,
+            child: Container(
+              height: 60,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 24, right: 0),
+                        child: Text('Expiration Date',
+                            style: Styles.formLabel(themeData)),
+                      )),
+                  Expanded(flex: 3, child: Text(widget.expirationDate)),
+                ],
               ),
-              Divider(height: 1, thickness: .5, indent: 36),
-              Container(
-                height: 60,
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                        flex: 2,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
-                          child: Text('Security Code',
-                              style: Styles.formLabel(themeData)),
-                        )),
-                    Expanded(flex: 3, child: Text(widget.securityCode)),
-                  ],
-                ),
+            ),
+          ),
+          Divider(height: 1, thickness: .5, indent: 36),
+          Expanded(
+            flex: 1,
+            child: Container(
+              height: 60,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Text('Security Code',
+                            style: Styles.formLabel(themeData)),
+                      )),
+                  Expanded(flex: 3, child: Text(widget.securityCode)),
+                ],
               ),
-              Divider(height: 1, thickness: .5),
-              Flexible(
-                  child: Container(
-                      alignment: Alignment.center,
-                      child: SizedBox(
-                        height: 60,
-                        width: 300,
-                        child: CupertinoButton.filled(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                            onPressed: () {
-                              PaymentCard newCard = PaymentCard(
-                                  widget.cardNumber,
-                                  widget.userName,
-                                  'assets/wallet/card.png',
-                                  'Debit');
-                              showCupertinoDialog(
-                                  context: context,
-                                  builder: (context) => CupertinoPopupSurface(
-                                      isSurfacePainted: true,
-                                      child: CupertinoActivityIndicator(
-                                          animating: true)));
-                              Future.delayed(const Duration(seconds: 2), () {
-                                Navigator.of(context).pop();
-                                Navigator.of(context).push(CupertinoPageRoute(
-                                    builder: (context) =>
-                                        CardDetails(newCard)));
-                              });
-                            },
-                            child: Text('Submit')),
-                      )))
-            ])));
+            ),
+          ),
+          Divider(height: 1, thickness: .5),
+          Expanded(
+              flex: 2,
+              child: Container(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                      height: 60,
+                      width: 300,
+                      child: CupertinoButton.filled(
+                        borderRadius: Styles.buttonShape(themeData),
+                        onPressed: () {
+                          PaymentCard newCard = PaymentCard(
+                              widget.cardNumber,
+                              widget.userName,
+                              'assets/wallet/card.png',
+                              'Debit');
+                          showCupertinoDialog(
+                              context: context,
+                              builder: (context) => CupertinoPopupSurface(
+                                  isSurfacePainted: true,
+                                  child: CupertinoActivityIndicator(
+                                      animating: true)));
+                          Future.delayed(const Duration(seconds: 2), () {
+                            Navigator.of(context).pop();
+                            Navigator.of(context).push(CupertinoPageRoute(
+                                builder: (context) => CardDetails(newCard)));
+                          });
+                        },
+                        child:
+                            Text('Submit', style: Styles.buttonText(themeData)),
+                      ))))
+        ]));
   }
 }

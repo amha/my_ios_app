@@ -4,8 +4,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_ios_app/resources/styles.dart';
 import 'package:my_ios_app/resources/standard_components.dart';
+import 'package:my_ios_app/resources/styles.dart';
 import 'package:my_ios_app/views/wallet/add_card_terms.dart';
 
 class SelectCardType extends StatefulWidget {
@@ -44,7 +44,8 @@ class _SelectCardTypeState extends State<SelectCardType>
 
   @override
   Widget build(BuildContext context) {
-    final themeData = CupertinoTheme.of(context);
+    // Reference to custom styles
+    final CupertinoThemeData themeData = CupertinoTheme.of(context);
 
     return CupertinoFullscreenDialogTransition(
       primaryRouteAnimation: _primary,
@@ -52,7 +53,7 @@ class _SelectCardTypeState extends State<SelectCardType>
       linearTransition: false,
       child: CupertinoPageScaffold(
           navigationBar: CupertinoNavigationBar(
-            backgroundColor: CupertinoTheme.of(context).barBackgroundColor,
+            backgroundColor: Styles.navBarBackgroundLight(themeData),
             leading: CupertinoButton(
                 padding: EdgeInsets.all(0),
                 onPressed: () {
@@ -99,6 +100,7 @@ class _SelectCardTypeState extends State<SelectCardType>
                             color: CupertinoColors.black,
                             borderRadius: Styles.roundedCorners(themeData),
                           ),
+                          child: Icon(CupertinoIcons.control, color: CupertinoColors.white, size: 28),
                           margin: EdgeInsets.symmetric(horizontal: 16),
                         ),
                       ),
@@ -136,6 +138,7 @@ class _SelectCardTypeState extends State<SelectCardType>
                             color: CupertinoColors.black,
                             borderRadius: Styles.roundedCorners(themeData),
                           ),
+                          child: Icon(CupertinoIcons.person, color: CupertinoColors.white, size: 28),
                           margin: EdgeInsets.symmetric(horizontal: 16),
                         ),
                       ),
@@ -179,9 +182,10 @@ class _SelectCardTypeState extends State<SelectCardType>
                           height: 40,
                           width: 60,
                           decoration: BoxDecoration(
-                            color: Color(0xfaaa44aa),
+                            color: Color(0xffd9a5d9),
                             borderRadius: Styles.roundedCorners(themeData),
                           ),
+                          child: Icon(CupertinoIcons.money_dollar, color: CupertinoColors.black, size: 30),
                           margin: EdgeInsets.symmetric(horizontal: 16),
                         ),
                       ),
@@ -216,16 +220,17 @@ class _SelectCardTypeState extends State<SelectCardType>
                           height: 40,
                           width: 60,
                           decoration: BoxDecoration(
-                            color: CupertinoColors.systemGreen,
+                            color: Color(0xffD8F8EB),
                             borderRadius: Styles.roundedCorners(themeData),
                           ),
+                          child: Icon(CupertinoIcons.cart, color: CupertinoColors.black, size: 26),
                           margin: EdgeInsets.symmetric(horizontal: 16),
                         ),
                       ),
                       Expanded(
                         flex: 3,
                         child: Text(
-                          'Shape Shopper',
+                          'Shopping Demo',
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w500),
                         ),

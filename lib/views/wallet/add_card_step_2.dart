@@ -4,8 +4,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_ios_app/resources/styles.dart';
 import 'package:my_ios_app/resources/standard_components.dart';
+import 'package:my_ios_app/resources/styles.dart';
 import 'package:my_ios_app/views/wallet/add_card_review.dart';
 
 class AddCardStep2 extends StatefulWidget {
@@ -21,8 +21,13 @@ class AddCardStep2 extends StatefulWidget {
 }
 
 class _AddCardStep2State extends State<AddCardStep2> {
+  // Controllers for the security code form field
   TextEditingController _securityCodeController = TextEditingController();
-  String date = '';
+
+  // Stores date value from [CupertinoDatePicker]
+  String expirationDate = '';
+
+  // Flag that enables the user to proceed to the next screen
   bool isSecurityCodeValid = false;
 
   @override
@@ -39,8 +44,10 @@ class _AddCardStep2State extends State<AddCardStep2> {
 
   @override
   Widget build(BuildContext context) {
-    final themeData = CupertinoTheme.of(context);
+    // Reference to custom styles
+    final CupertinoThemeData themeData = CupertinoTheme.of(context);
 
+    // User prompt
     final String title = 'Card details';
     final String description = 'Enter your card information.';
 
@@ -57,7 +64,7 @@ class _AddCardStep2State extends State<AddCardStep2> {
                         builder: (context) => ReviewCardDetails(
                             widget.userName,
                             widget.cardNumber,
-                            date,
+                            expirationDate,
                             _securityCodeController.text)));
                   }
                 },
@@ -90,8 +97,8 @@ class _AddCardStep2State extends State<AddCardStep2> {
                                 onTap: () {
                                   showPicker(context);
                                 },
-                                child:
-                                    Text('$date', textAlign: TextAlign.left))),
+                                child: Text('$expirationDate',
+                                    textAlign: TextAlign.left))),
                       ],
                     ),
                   ),
@@ -103,8 +110,7 @@ class _AddCardStep2State extends State<AddCardStep2> {
                         Expanded(
                             flex: 2,
                             child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 24),
+                              padding: const EdgeInsets.only(left: 24),
                               child: Text('Security Code',
                                   style: Styles.formLabel(themeData)),
                             )),
@@ -130,6 +136,7 @@ class _AddCardStep2State extends State<AddCardStep2> {
         ));
   }
 
+  // Validate user input conforms to a 3-digit numeric code
   void checkSecurityCode() {
     String value = _securityCodeController.text;
     RegExp reggie = RegExp(r'[A-Z][a-z]');
@@ -144,6 +151,7 @@ class _AddCardStep2State extends State<AddCardStep2> {
     }
   }
 
+  // [CupertinoDatePicker] displayed to capture card expiration date.
   void showPicker(BuildContext context) {
     showCupertinoModalPopup(
       context: context,
@@ -153,18 +161,20 @@ class _AddCardStep2State extends State<AddCardStep2> {
         child: CupertinoDatePicker(
             initialDateTime: DateTime.now(),
             mode: CupertinoDatePickerMode.date,
-            minimumYear: 2020,
-            maximumYear: 2028,
+            minimumYear: 2021,
+            maximumYear: 2026,
             onDateTimeChanged: (val) {
               setState(() {
-                date = getMonth(val.month) + " - " + val.year.toString();
+                expirationDate =
+                    _getMonth(val.month) + ", " + val.year.toString();
               });
             }),
       ),
     );
   }
 
-  String getMonth(int numericMonth) {
+  // Convert numeric month value (e.g. 1) to string (e.g. January)
+  String _getMonth(int numericMonth) {
     String month = '';
     switch (numericMonth) {
       case 1:

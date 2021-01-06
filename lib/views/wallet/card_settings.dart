@@ -5,6 +5,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_ios_app/model/wallet/card.dart';
+import 'package:my_ios_app/resources/styles.dart';
 
 class CardSettings extends StatefulWidget {
   final PaymentCard card;
@@ -18,12 +19,16 @@ class CardSettings extends StatefulWidget {
 }
 
 class _CardSettingsState extends State<CardSettings> {
-  /// toggle values
+  // Responsible for displaying transaction history or not
   bool _historySwitch = false;
+
+  // Responsible for allowing push notifications for this car
   bool _notificationSwitch = false;
 
   @override
   Widget build(BuildContext context) {
+    final themeData = CupertinoTheme.of(context);
+
     double screenWidth = MediaQuery.of(context).size.width;
     double buttonWidth = (screenWidth / 2.0) - 16;
 
@@ -127,7 +132,7 @@ class _CardSettingsState extends State<CardSettings> {
                     flex: 1,
                     child: CircleAvatar(
                       radius: 22,
-                      backgroundColor: CupertinoColors.activeBlue,
+                      backgroundColor: CupertinoTheme.of(context).primaryColor,
                       child: Text(
                         'A',
                         style: TextStyle(
@@ -172,8 +177,9 @@ class _CardSettingsState extends State<CardSettings> {
                         onPressed: () {},
                         child: Text(
                           'Install',
-                          style:
-                              TextStyle(color: Colors.blueAccent, fontSize: 14),
+                          style: CupertinoTheme.of(context)
+                              .textTheme
+                              .actionTextStyle,
                         ),
                       ),
                     ),
@@ -251,7 +257,9 @@ class _CardSettingsState extends State<CardSettings> {
                       onPressed: () {},
                       child: Text(
                         'Express Transit Settings',
-                        style: TextStyle(color: Colors.blueAccent),
+                        style: CupertinoTheme.of(context)
+                            .textTheme
+                            .actionTextStyle,
                       ),
                     ),
                   ),
@@ -352,7 +360,9 @@ class _CardSettingsState extends State<CardSettings> {
                       onPressed: () {},
                       child: Text(
                         'Privacy policy',
-                        style: TextStyle(color: Colors.blueAccent),
+                        style: CupertinoTheme.of(context)
+                            .textTheme
+                            .actionTextStyle,
                       ),
                     ),
                   ),
@@ -370,7 +380,9 @@ class _CardSettingsState extends State<CardSettings> {
                       onPressed: () {},
                       child: Text(
                         'Terms of use',
-                        style: TextStyle(color: Colors.blueAccent),
+                        style: CupertinoTheme.of(context)
+                            .textTheme
+                            .actionTextStyle,
                       ),
                     ),
                   ),
@@ -389,7 +401,7 @@ class _CardSettingsState extends State<CardSettings> {
                 onPressed: () {},
                 child: Text(
                   'Delete card',
-                  style: TextStyle(color: Colors.red),
+                  style: Styles.deleteActionText(themeData),
                 ),
               ),
             )

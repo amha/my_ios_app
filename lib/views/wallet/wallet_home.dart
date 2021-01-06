@@ -10,6 +10,8 @@ import 'package:my_ios_app/views/wallet/add_card_type_selection.dart';
 import 'package:my_ios_app/views/wallet/card_details.dart';
 
 class WalletHome extends StatefulWidget {
+  // TODO: Add wallet provider for list of cards.
+
   @override
   State<StatefulWidget> createState() {
     return _WalletHomeState();
@@ -142,6 +144,7 @@ class _WalletHomeState extends State<WalletHome> {
     );
   }
 
+  /// Returns a card UI based on [card] data stored in the wallet provider.
   Widget _buildCard(PaymentCard card) {
     return GestureDetector(
       onTap: () {

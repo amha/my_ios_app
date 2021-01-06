@@ -4,8 +4,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_ios_app/resources/styles.dart';
 import 'package:my_ios_app/resources/standard_components.dart';
+import 'package:my_ios_app/resources/styles.dart';
 
 import 'add_card_step_2.dart';
 
@@ -17,9 +17,11 @@ class AddCardStep1 extends StatefulWidget {
 }
 
 class _AddCardStep1State extends State<AddCardStep1> {
+  // Controllers for the 2 form fields on this screen
   TextEditingController _userNameController = TextEditingController();
   TextEditingController _cardNumberController = TextEditingController();
 
+  // Flags that enable the user to proceed to the next screen
   bool isUserNameValid = false;
   bool isCardNumberValid = false;
 
@@ -39,8 +41,10 @@ class _AddCardStep1State extends State<AddCardStep1> {
 
   @override
   Widget build(BuildContext context) {
-    final themeData = CupertinoTheme.of(context);
+    // Reference to custom styles
+    final CupertinoThemeData themeData = CupertinoTheme.of(context);
 
+    // User prompt
     final String title = 'Card details';
     final String description = 'Verify and complete your card information';
 
@@ -129,6 +133,7 @@ class _AddCardStep1State extends State<AddCardStep1> {
         ));
   }
 
+  // Validate the user has entered a reasonable name
   void checkUserName() {
     String input = _userNameController.text;
     RegExp reggie = RegExp(r'[0-9]');
@@ -139,9 +144,10 @@ class _AddCardStep1State extends State<AddCardStep1> {
     }
   }
 
+  // Validate the user has entered a 16 digit number
   void checkCardNumber() {
     String input = _cardNumberController.text;
-    if (input.length > 5) {
+    if (input.length == 16) {
       setState(() {
         isCardNumberValid = true;
       });

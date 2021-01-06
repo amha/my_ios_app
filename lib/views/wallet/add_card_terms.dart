@@ -3,14 +3,23 @@
 // in the LICENSE file.
 
 import 'package:flutter/cupertino.dart';
-import 'package:my_ios_app/resources/styles.dart';
 import 'package:my_ios_app/resources/standard_components.dart';
+import 'package:my_ios_app/resources/styles.dart';
 import 'package:my_ios_app/views/wallet/add_card_step_1.dart';
 
 class PresentTerms extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Reference to custom styles
     final CupertinoThemeData themeData = CupertinoTheme.of(context);
+
+    // User prompt
+    final String termsName = 'SuperPay';
+    final String termsPrompt = 'Add cards to send money anywhere in the world.';
+
+    // Legal text is effectively latin to me
+    final String termsDescription =
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
 
     double screenWidth = MediaQuery.of(context).size.width;
 
@@ -41,9 +50,10 @@ class PresentTerms extends StatelessWidget {
                   children: [
                     formHeader('$termsName', '$termsPrompt'),
                     Icon(CupertinoIcons.folder,
-                        color: CupertinoTheme.of(context).primaryColor),
+                        color: CupertinoTheme.of(context).primaryColor,
+                        size: 28),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(16, 4, 16, 16),
+                      padding: EdgeInsets.fromLTRB(24, 4, 24, 16),
                       child: Text(
                         '$termsDescription',
                         style: TextStyle(
@@ -57,12 +67,13 @@ class PresentTerms extends StatelessWidget {
                         height: 60,
                         width: 300,
                         child: CupertinoButton.filled(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderRadius: Styles.buttonShape(themeData),
                           onPressed: () {
                             Navigator.of(context).push(CupertinoPageRoute(
                                 builder: (context) => AddCardStep1()));
                           },
-                          child: Text('Continue'),
+                          child: Text('Continue',
+                              style: Styles.buttonText(themeData)),
                         ),
                       ),
                     )
@@ -72,8 +83,3 @@ class PresentTerms extends StatelessWidget {
         ));
   }
 }
-
-final String termsName = 'SuperPay';
-final String termsPrompt = 'Add cards to send money anywhere in the world.';
-final String termsDescription =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
